@@ -2,6 +2,10 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# Connect to MongoDB
+client = MongoClient(os.getenv("MONGO_URI", "mongodb://mongodb:27017/"))
+db = client.test
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     """
