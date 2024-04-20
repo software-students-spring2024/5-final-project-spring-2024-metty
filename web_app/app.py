@@ -9,7 +9,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     """
@@ -17,6 +16,8 @@ def index():
     """
     return render_template("home.html")
 
-
+# if __name__ == '__main__':
+#     app.run(port="5000", host="0.0.0.0")
 if __name__ == "__main__":
-    app.run(port="5000", host="0.0.0.0")
+    FLASK_PORT = os.getenv("FLASK_PORT", "5000")
+    app.run(port=FLASK_PORT)

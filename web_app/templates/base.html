@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DoroPomo</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="header-bar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/tomato.png') }}" alt="Logo">
+            </div>
+            <div class="menu">
+                <a href="#">ACTIVITY</a>
+                <a href="#">SETTINGS</a>
+                <a href="#">LOG IN</a>
+            </div>
+        </div>
+        <main>{% block container %} {% endblock %}</main>
+    </div>
+  </body>
+</html>
