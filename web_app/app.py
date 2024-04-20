@@ -1,11 +1,13 @@
-from flask import Flask, render_template
 import os
+from flask import Flask, render_template
+from pymongo import MongoClient
+from dotenv import load_dotenv
+from db import *
+from auth import *
+
+load_dotenv()
 
 app = Flask(__name__)
-
-# Connect to MongoDB
-#client = MongoClient(os.getenv("MONGO_URI", "mongodb://mongodb:27017/"))
-#db = client.test
 
 @app.route("/", methods=["GET", "POST"])
 def index():
