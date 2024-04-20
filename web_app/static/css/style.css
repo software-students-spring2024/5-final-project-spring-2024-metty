@@ -22,6 +22,9 @@ body {
 .header-bar .menu {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .header-bar .menu a {
