@@ -25,9 +25,13 @@ db = client[db_name]
 client = MongoClient(os.getenv("MONGO_URI", "mongodb://mongodb:27017/"))
 db = client.test
 
+
+"""
+TODO: Uncomment once mongoDB environment is set up
 # Send a ping to confirm a successful connection
 try:
     client.admin.command("ping")
     print("Connected to MongoDB!")
 except Exception as e:
     print("MongoDB connection error:", e)
+"""
