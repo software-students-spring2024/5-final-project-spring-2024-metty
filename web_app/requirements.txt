@@ -2,3 +2,4 @@ Flask
 flask-login
 pymongo
 python-dotenv
+pytest
