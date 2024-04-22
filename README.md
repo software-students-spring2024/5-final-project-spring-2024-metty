@@ -1,9 +1,3 @@
-# Final Project
-
-An exercise to put to practice software development teamwork, subsystem communication, containers, deployment, and CI/CD pipelines. See [instructions](./instructions.md) for details.
-
-test
-
 # DoroPomo
 
 DoroPomo is a gamified Pomodoro web application designed to enhance productivity and time management skills. With DoroPomo, users embark on an exciting journey of focused work sessions, unlocking new levels and animations as they progress. Two types of users are catered for: guest users, who can access the default animation and utilize the Pomodoro timer, and logged-in users, who enjoy additional features such as multiple animations, data analysis insights, and level-based achievements.
@@ -18,11 +12,11 @@ From the root dir, run
 
 Check localhost:5000 to try the web app.
 
-# To build + run db container if entering pipenv shell manually:
+# Dockerhub Images
 
-`docker run --name mongodb -d -p 27017:27017`
+[web_app image](https://hub.docker.com/r/teammetty4eva/web_app)
 
-Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
+[final_project image](https://hub.docker.com/r/teammetty4eva/final_project)
 
 ## Contributors
 
@@ -30,3 +24,15 @@ Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
 * [Ahmet Ilten](https://github.com/iltenahmet)
 * [Glenda Boeker](https://github.com/gboeker)
 * [Amber Li](https://github.com/al6862)
+
+
+# FOR DEVS:
+
+## To build + run db container if entering pipenv shell manually:
+
+`docker run --name mongodb -d -p 27017:27017`
+
+Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
+
+## Figma file
+https://www.figma.com/file/24LGaSUtQbYkMu7X7xB6Nf/doropomo?type=design&node-id=0-1&mode=design&t=YfX4QiaG4TQj6vn1-0
