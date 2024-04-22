@@ -12,12 +12,6 @@ From the root dir, run
 
 Check localhost:5000 to try the web app.
 
-# To build + run db container if entering pipenv shell manually:
-
-`docker run --name mongodb -d -p 27017:27017`
-
-Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
-
 # Dockerhub Images
 
 [web_app image](https://hub.docker.com/r/teammetty4eva/web_app)
@@ -28,3 +22,15 @@ Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
 * [Ahmet Ilten](https://github.com/iltenahmet)
 * [Glenda Boeker](https://github.com/gboeker)
 * [Amber Li](https://github.com/al6862)
+
+
+# FOR DEVS:
+
+## To build + run db container if entering pipenv shell manually:
+
+`docker run --name mongodb -d -p 27017:27017`
+
+Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
+
+## Figma file
+https://www.figma.com/file/24LGaSUtQbYkMu7X7xB6Nf/doropomo?type=design&node-id=0-1&mode=design&t=YfX4QiaG4TQj6vn1-0
