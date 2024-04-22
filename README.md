@@ -16,6 +16,12 @@ From the root dir, run
 
 Check localhost:5000 to try the web app.
 
+# To build + run db container if entering pipenv shell manually:
+
+`docker run --name mongodb -d -p 27017:27017`
+
+Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
+
 ## Contributors
 
 * [Shriya Kalakata](https://github.com/shriyakalakata)
