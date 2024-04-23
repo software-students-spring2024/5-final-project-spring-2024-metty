@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
 
+/* HEADER AND NAV BAR */
 body {
     font-family: 'Single Day', sans-serif;
 }
@@ -37,6 +38,7 @@ body {
     margin-right: 20;
 }
 
+/* IMAGES */
 .images-container {
     display: flex;
     flex-direction: column;
@@ -49,25 +51,55 @@ body {
     margin-bottom: 10px; /* Add space between images and button */
 }
 
-.images-container img {
-    width: 40vw; 
-    
+.doropomo {
+    position: absolute;
+    top: 30px; /* Keep the "doropomo" image fixed at the top of its container */
 }
 
-.tomato {
+.doropomo img {
+    width: 580px;
+}
+
+.tomato_image {
     position: relative;
-    margin-top: -7vh; /* Adjust the negative margin to create overlap */
+    margin-top: 10vh;
+    margin-right: 15px;
+    width: 500px;
+}
+
+.pomodoro_pasta_image {
+    position: relative;
+    margin-top: 10vh; 
+    width: 650px;
+}
+
+.stirring_pasta_image {
+    position: relative;
+    margin-top: -10vh;
+    margin-right: 7px;
+    width: 600px;
+    transform: rotate(-2deg); 
 }
 
 .start-button {
     font-family: 'Single Day', sans-serif;
     position: absolute;
-    top: 70%;
+    top: 72%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
-    font-size: 80px;
+    font-size: 70px;
+}
+
+.time {
+    font-family: 'Single Day', sans-serif;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FAFAFA;
+    font-size: 140px;
 }
