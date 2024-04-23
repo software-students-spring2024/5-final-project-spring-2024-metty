@@ -2,12 +2,19 @@
 
 {% block container %}
 
-  <div class="images-container">
+<div class="images-container">
+  <div class="doropomo">
     <img src="/static/images/doropomo.png" alt="doropomo">
-    <div class="tomato">
-        <img src="/static/images/tomato.png" alt="tomato.png">
-        <button class="start-button">START</button>
-    </div>
+  </div>
+  <div class="pomodoro_image">
+    
+    <img class="tomato_image" src="/static/images/tomato.png" alt="tomato.png">
+    <!-- <img class="pomodoro_pasta_image" src="/static/images/pomodoro_pasta.png" alt="pomodoro_pasta.png"> -->
+    <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
+   
+  </div>
+  <p class="time">25:00</p>
+  <button class="start-button">START</button>
 </div>
 
 {% endblock %}
