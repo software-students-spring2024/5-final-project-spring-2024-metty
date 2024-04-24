@@ -13,8 +13,43 @@
     <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
    
   </div>
-  <p class="time">25:00</p>
+  <p class="time" id="timer">25:00</p>
   <button class="start-button">START</button>
 </div>
+
+<!-- countdown timer -->
+<script>
+  var timeLimitInMinutes = 25;
+  var timeLimitInSeconds = timeLimitInMinutes * 60;
+  var timerElement = document.getElementById('timer');
+
+  var timerInterval;
+  
+  // update the countdown timer every second
+  function startTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+  // update countdown
+  function updateTimer() {
+    timeLimitInSeconds--;
+    var minutes = Math.floor(timeLimitInSeconds / 60);
+    var seconds = timeLimitInSeconds % 60;
+    if (timeLimitInSeconds < 0) {
+      timerElement.textContent = '00:00';
+      clearInterval(timerInterval);
+      return;
+    }
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+    timerElement.textContent = minutes + ':' + seconds;
+  }
+  // start countdown when start button is clicked
+  document.querySelector('.start-button').addEventListener('click', startTimer);
+
+</script>
 
 {% endblock %}
