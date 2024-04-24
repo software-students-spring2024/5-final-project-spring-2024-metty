@@ -20,13 +20,13 @@ def index():
     """
     return render_template("home.html")
 
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    """
-    default page
-    """
+@app.route("/signup", methods=["GET"])
+def render_signup():
     return render_template("signup.html")
 
+@app.route("/signup", methods=["POST"])
+def signup():
+    return auth_signup()
 
 @app.route("/<username>/time-studied", methods=["POST"])
 def insert_time_studied(username):
