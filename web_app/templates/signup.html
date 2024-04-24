@@ -12,7 +12,7 @@
       <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
      
     </div>
-    <form id="signup-form" action="{{action}}" method="post">
+    <form id="signup-form" method="post">
         <input class="signup-input" type="username" name="username" placeholder="username" required>
         {% if username_taken %}
             <p class="signup-error"> This username is taken. </p> 
