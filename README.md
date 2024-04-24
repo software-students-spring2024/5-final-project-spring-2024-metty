@@ -30,7 +30,7 @@ Check localhost:5000 to try the web app.
 
 `docker run --name mongodb -d -p 27017:27017 mongo`
 
-Then, make a .env with `MONGO_URI=mongodb://localhost:27017/`.
+Then, make a .env with `MONGO_URI=mongodb://localhost:27017/` and `SECRET_KEY=dev`.
 
 ## Figma file
 https://www.figma.com/file/24LGaSUtQbYkMu7X7xB6Nf/doropomo?type=design&node-id=0-1&mode=design&t=YfX4QiaG4TQj6vn1-0

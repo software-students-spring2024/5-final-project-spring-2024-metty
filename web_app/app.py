@@ -11,7 +11,11 @@ from datetime import datetime
 load_dotenv()
 
 app = Flask(__name__)
+login_manager.init_app(app)
 
+# Secret key for login session management, set this up in your .env file 
+load_dotenv()
+app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -20,6 +24,13 @@ def index():
     """
     return render_template("home.html")
 
+@app.route("/signup", methods=["GET"])
+def render_signup():
+    return render_template("signup.html")
+
+@app.route("/signup", methods=["POST"])
+def signup():
+    return auth_signup()
 
 @app.route("/<username>/time-studied", methods=["POST"])
 def insert_time_studied(username):

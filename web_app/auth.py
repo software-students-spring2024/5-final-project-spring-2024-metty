@@ -76,8 +76,7 @@ def auth_signup():
             )
             login_user(user)
             # Redirect to the appropriate page for the logged in user
-            return redirect("/" + user_id + "/decks")
-
+            return redirect("/")
     else:
         return render_template(
             "signup.html", username_taken=False, passwords_dont_match=False

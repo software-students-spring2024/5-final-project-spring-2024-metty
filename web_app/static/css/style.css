@@ -103,3 +103,40 @@ body {
     color: #FAFAFA;
     font-size: 140px;
 }
+
+/* SIGNUP FORM */
+
+#signup-form {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#signup-button {
+    /* position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    color: #FAFAFA;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    font-size: 70px;
+    font-family: 'Single Day', sans-serif;
+}
+
+.signup-input::placeholder {
+    color: rgba(128,128,128,0.5);
+}
+
+.signup-input {
+    height: 40px;
+    width: 300px;
+    font-family: 'Single Day', sans-serif;
+    font-size: 20px;
+    padding-left: 20px;
+    margin: 2px;
+}
