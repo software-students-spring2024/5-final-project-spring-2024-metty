@@ -15,25 +15,48 @@
   </div>
   <p class="time" id="timer">25:00</p>
   <button class="start-button">START</button>
+  <button class="pause-button">PAUSE</button>
 </div>
 
 <!-- countdown timer -->
 <script>
-  var timeLimitInMinutes = 25;
-  var timeLimitInSeconds = timeLimitInMinutes * 60;
-  var timerElement = document.getElementById('timer');
+  const TIME_LIMIT = 25 * 60;
 
-  var timerInterval;
+  let timeLimitInSeconds = TIME_LIMIT;
+  let timerElement = document.getElementById('timer');
+
+  let timerInterval;
+
+  // get the buttons
+  let startButton = document.querySelector('.start-button');
+  let pauseButton = document.querySelector('.pause-button');
+
+  // set initial display states of the buttons
+  startButton.style.display = "initial";
+  pauseButton.style.display = "none";
   
+  // add event listeners to buttons 
+  startButton.addEventListener('click', startTimer);
+  pauseButton.addEventListener('click', pauseTimer);
+
   // update the countdown timer every second
   function startTimer() {
     timerInterval = setInterval(updateTimer, 1000);
+    startButton.style.display = "none";
+    pauseButton.style.display = "initial";
   }
+
+  function pauseTimer() {
+    startButton.style.display = "initial";
+    pauseButton.style.display = "none";
+    clearInterval(timerInterval);
+  }
+
   // update countdown
   function updateTimer() {
     timeLimitInSeconds--;
-    var minutes = Math.floor(timeLimitInSeconds / 60);
-    var seconds = timeLimitInSeconds % 60;
+    let minutes = Math.floor(timeLimitInSeconds / 60);
+    let seconds = timeLimitInSeconds % 60;
     if (timeLimitInSeconds < 0) {
       timerElement.textContent = '00:00';
       clearInterval(timerInterval);
@@ -47,8 +70,6 @@
     }
     timerElement.textContent = minutes + ':' + seconds;
   }
-  // start countdown when start button is clicked
-  document.querySelector('.start-button').addEventListener('click', startTimer);
 
 </script>
 

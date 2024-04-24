@@ -81,7 +81,7 @@ body {
     transform: rotate(-2deg); 
 }
 
-.start-button {
+.start-button, .pause-button {
     font-family: 'Single Day', sans-serif;
     position: absolute;
     top: 72%;
