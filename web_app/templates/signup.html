@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<div class="images-container">
+    <div class="doropomo">
+      <img src="/static/images/doropomo.png" alt="doropomo">
+    </div>
+    <div class="pomodoro_image">
+      
+      <img class="tomato_image" src="/static/images/tomato.png" alt="tomato.png">
+      <!-- <img class="pomodoro_pasta_image" src="/static/images/pomodoro_pasta.png" alt="pomodoro_pasta.png"> -->
+      <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
+     
+    </div>
+    <form id="signup-form" action="{{action}}" method="post">
+        <input class="signup-input" type="username" name="username" placeholder="username" required>
+        {% if username_taken %}
+            <p class="signup-error"> This username is taken. </p> 
+        {% endif %}
+        <input class="signup-input" type="password" name="password" placeholder="password" required>
+        <input class="signup-input" type="password" name="confirm-password" placeholder="confirm password" required>
+        <input id="signup-button" type="submit" value="SIGN UP">
+    </form>
+  </div>
+{% endblock %}
