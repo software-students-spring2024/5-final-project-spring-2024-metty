@@ -116,19 +116,19 @@ body {
     font-size: 140px;
 }
 
-/* SIGNUP FORM */
-#signup-form {
+/* SIGNUP AND LOGIN FORM */
+#auth-form {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 60%;
+    top: 62%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: #463331;
 }
 
-#signup-button {
+#auth-button {
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -137,87 +137,36 @@ body {
     font-family: 'Single Day', sans-serif;
 }
 
-.signup-input::placeholder {
+.auth-input::placeholder {
     color: rgba(128,128,128,0.5);
 }
 
-.signup-input {
+.auth-input {
     height: 40px;
     width: 300px;
     font-family: 'Single Day', sans-serif;
     font-size: 20px;
     padding-left: 20px;
     margin: 2px;
+    border: 0;
+    border-radius: 3px;
 }
 
-#signup-cta{
+#auth-cta{
     position: absolute;
     text-align: center;
     bottom: 10px;
     color: #463331;
 }
 
-#signup-cta p {
+#auth-cta p {
     margin: 0px;
 }
 
-#signup-cta h1 {
+#auth-cta h1 {
     margin: 0px;
 }
 
-#signup-cta a {
-    color: inherit;
-}
-
-/* LOGIN FORM */
-#login-form {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #463331;
-}
-
-#login-button {
-    color: #FAFAFA;
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
-    cursor: pointer;
-    font-size: 70px;
-    font-family: 'Single Day', sans-serif;
-}
-
-.login-input::placeholder {
-    color: rgba(128,128,128,0.5);
-}
-
-.login-input {
-    height: 40px;
-    width: 300px;
-    font-family: 'Single Day', sans-serif;
-    font-size: 20px;
-    padding-left: 20px;
-    margin: 2px;
-}
-
-#login-cta{
-    position: absolute;
-    text-align: center;
-    bottom: 10px;
-    color: #463331;
-}
-
-#login-cta p {
-    margin: 0px;
-}
-
-#login-cta h1 {
-    margin: 0px;
-}
-
-#login-cta a {
+#auth-cta a {
     color: inherit;
 }

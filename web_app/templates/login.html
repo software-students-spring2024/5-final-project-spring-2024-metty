@@ -8,15 +8,15 @@
     <div class="pomodoro-image">
         <img class="tomato-image" src="/static/images/tomato.png" alt="tomato.png">
     </div>
-    <form id="login-form" method="post">
-        <input class="login-input" type="username" name="username" placeholder="username" required>
-        <input class="login-input" type="password" name="password" placeholder="password" required>
+    <form id="auth-form" method="post">
+        <input class="auth-input" type="username" name="username" placeholder="username" required>
+        <input class="auth-input" type="password" name="password" placeholder="password" required>
         {% if invalid_login %}
             <p class="login-error"> PASSWORD OR USERNAME IS INVALID </p> 
         {% endif %}
-        <input id="login-button" type="submit" value="LOGIN">
+        <input id="auth-button" type="submit" value="LOGIN">
     </form>
-    <div id="login-cta">
+    <div id="auth-cta">
         <p>DON'T HAVE AN ACCOUNT YET?</p>
         <a href="/signup"><h1>SIGN UP</h1></a>
     </div>
