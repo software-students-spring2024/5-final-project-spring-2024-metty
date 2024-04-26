@@ -60,20 +60,20 @@ body {
     width: 580px;
 }
 
-.tomato_image {
+.tomato-image {
     position: relative;
     margin-top: 10vh;
     margin-right: 15px;
     width: 500px;
 }
 
-.pomodoro_pasta_image {
+.pomodoro-pasta-image {
     position: relative;
     margin-top: 10vh; 
     width: 650px;
 }
 
-.stirring_pasta_image {
+.stirring-pasta-image {
     position: relative;
     margin-top: -10vh;
     margin-right: 7px;
@@ -81,11 +81,24 @@ body {
     transform: rotate(-2deg); 
 }
 
-.start-button, .pause-button {
+.start-button, .pause-button, .continue-button {
     font-family: 'Single Day', sans-serif;
     position: absolute;
     top: 72%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FAFAFA;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    font-size: 70px;
+}
+
+.reset-button {
+    font-family: 'Single Day', sans-serif;
+    position: absolute;
+    top: 72%;
+    left: 40%;
     transform: translate(-50%, -50%);
     color: #FAFAFA;
     border: none;

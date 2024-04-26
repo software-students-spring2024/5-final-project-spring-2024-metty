@@ -6,14 +6,17 @@
   <div class="doropomo">
     <img src="/static/images/doropomo.png" alt="doropomo">
   </div>
-  <div class="pomodoro_image">
+  <div class="pomodoro-image">
     
-    <img class="tomato_image" src="/static/images/tomato.png" alt="tomato.png">
-    <!-- <img class="pomodoro_pasta_image" src="/static/images/pomodoro_pasta.png" alt="pomodoro_pasta.png"> -->
-    <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
+    <img class="tomato-image" src="/static/images/tomato.png" alt="tomato.png">
+    <img class="pomodoro-pasta-image" src="/static/images/pomodoro-pasta.png" alt="pomodoro-pasta.png">
+    <img class="stirring-pasta-image" src="/static/images/stirring-pasta.png" alt="stirring-pasta.png">
    
   </div>
   <p class="time" id="timer">25:00</p>
+  <button class="reset-button">
+    <img class="reset-image" src="/static/images/reset.svg" alt="reset.svg">
+  </button>
   <button class="start-button">START</button>
   <button class="pause-button">PAUSE</button>
 </div>
@@ -22,53 +25,122 @@
 <script>
   const TIME_LIMIT = 25 * 60;
 
-  let timeLimitInSeconds = TIME_LIMIT;
+  /*
+  * This enum stores the state timer is in.
+  * This info is useful when skipping from break to work, and vice versa.
+  * Also, we can show different images after work is over, and after break is over.
+  */
+  const TimerState = Object.freeze({ 
+    BEGINNING: 0,
+    WORKING: 1,
+    PAUSED: 2,
+    ON_BREAK: 3,
+  }); 
+
+  let timeLeftInSeconds = TIME_LIMIT;
   let timerElement = document.getElementById('timer');
 
   let timerInterval;
 
-  // get the buttons
+  // get the buttons and the images
   let startButton = document.querySelector('.start-button');
   let pauseButton = document.querySelector('.pause-button');
+  let resetButton = document.querySelector('.reset-button');
+  let tomatoImage = document.querySelector('.tomato-image');
+  let pomodoroPastaImage = document.querySelector('.pomodoro-pasta-image');
+  let stirringPastaImage = document.querySelector('.stirring-pasta-image');
 
-  // set initial display states of the buttons
-  startButton.style.display = "initial";
-  pauseButton.style.display = "none";
+  // set initial state of the timer
+  resetTimer();
   
   // add event listeners to buttons 
   startButton.addEventListener('click', startTimer);
   pauseButton.addEventListener('click', pauseTimer);
+  resetButton.addEventListener('click', resetTimer);
 
-  // update the countdown timer every second
   function startTimer() {
+    // update the countdown timer every second
     timerInterval = setInterval(updateTimer, 1000);
-    startButton.style.display = "none";
-    pauseButton.style.display = "initial";
+
+    showPauseButton();
+    resetButton.style.display = "initial";
+    showStirringPastaImage();
+
+    currentState = TimerState.WORK;
   }
 
   function pauseTimer() {
-    startButton.style.display = "initial";
-    pauseButton.style.display = "none";
+    clearInterval(timerInterval); // stops the countdown
+    showStartButton();
+
+    currentState = TimerState.PAUSED;
+  }
+
+  function resetTimer() {
+    // TODO: Here we need to send information to the server about how much the user has studied
     clearInterval(timerInterval);
+
+    // reset time left and the text
+    timeLeftInSeconds = TIME_LIMIT;
+    timerElement.textContent = getTimeAsString(timeLeftInSeconds);
+
+    showTomatoImage();
+    showStartButton();
+    resetButton.style.display = "none";
+
+    currentState = TimerState.BEGINNING;
   }
 
   // update countdown
   function updateTimer() {
-    timeLimitInSeconds--;
-    let minutes = Math.floor(timeLimitInSeconds / 60);
-    let seconds = timeLimitInSeconds % 60;
-    if (timeLimitInSeconds < 0) {
-      timerElement.textContent = '00:00';
+    timeLeftInSeconds--;
+    if (timeLeftInSeconds < 0) {
+      // TODO: Here we need to send information to the server about how much the user has studied
       clearInterval(timerInterval);
       return;
     }
+    timerElement.textContent = getTimeAsString(timeLeftInSeconds);
+  }
+
+  function showStartButton() {
+    startButton.style.display = "initial";
+    pauseButton.style.display = "none";
+  }
+
+  function showPauseButton() {
+    startButton.style.display = "none";
+    pauseButton.style.display = "initial";
+  }
+
+  function showTomatoImage() {
+    tomatoImage.style.display = "initial";
+    pomodoroPastaImage.style.display = "none";
+    stirringPastaImage.style.display = "none";
+  }
+
+  function showPomodoroPastaImage() {
+    tomatoImage.style.display = "none";
+    pomodoroPastaImage.style.display = "initial";
+    stirringPastaImage.style.display = "none";
+  }
+
+  function showStirringPastaImage() {
+    tomatoImage.style.display = "none";
+    pomodoroPastaImage.style.display = "none";
+    stirringPastaImage.style.display = "initial";
+  }
+
+  function getTimeAsString(totalSeconds) {
+    if (totalSeconds < 0) return '00:00';
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
     if (minutes < 10) {
       minutes = '0' + minutes;
     }
     if (seconds < 10) {
       seconds = '0' + seconds;
     }
-    timerElement.textContent = minutes + ':' + seconds;
+    return minutes + ':' + seconds;
   }
 
 </script>
