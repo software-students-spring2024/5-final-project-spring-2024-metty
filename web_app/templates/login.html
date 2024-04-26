@@ -15,6 +15,9 @@
     <form id="login-form" method="post">
         <input class="login-input" type="username" name="username" placeholder="username" required>
         <input class="login-input" type="password" name="password" placeholder="password" required>
+        {% if invalid_login %}
+        <p class="login-error"> Password or username is invalid </p> 
+        {% endif %}
         <input id="login-button" type="submit" value="LOGIN">
     </form>
     <div id="login-cta">
