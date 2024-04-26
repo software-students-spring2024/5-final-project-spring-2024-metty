@@ -12,7 +12,6 @@ body {
     padding: 10px;
     background-color: #BFB0AD;
     font-size: 25px;
-
 }
 
 .header-bar .logo img {
@@ -118,7 +117,6 @@ body {
 }
 
 /* SIGNUP FORM */
-
 #signup-form {
     display: flex;
     flex-direction: column;
@@ -172,7 +170,6 @@ body {
 }
 
 /* LOGIN FORM */
-
 #login-form {
     display: flex;
     flex-direction: column;
