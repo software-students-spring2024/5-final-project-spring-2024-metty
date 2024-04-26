@@ -116,10 +116,6 @@ body {
 }
 
 #signup-button {
-    /* position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -141,6 +137,25 @@ body {
     margin: 2px;
 }
 
+#signup-cta{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    color: #463331;
+}
+
+#signup-cta p {
+    margin: 0px;
+}
+
+#signup-cta h1 {
+    margin: 0px;
+}
+
+#signup-cta a {
+    color: inherit;
+}
+
 /* LOGIN FORM */
 
 #login-form {
@@ -153,10 +168,6 @@ body {
 }
 
 #login-button {
-    /* position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -176,4 +187,23 @@ body {
     font-size: 20px;
     padding-left: 20px;
     margin: 2px;
+}
+
+#login-cta{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    color: #463331;
+}
+
+#login-cta p {
+    margin: 0px;
+}
+
+#login-cta h1 {
+    margin: 0px;
+}
+
+#login-cta a {
+    color: inherit;
 }

@@ -12,22 +12,14 @@
         <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
         
     </div>
-    <!-- <form id="signup-form" method="post">
-        <input class="signup-input" type="username" name="username" placeholder="username" required>
-        {% if username_taken %}
-            <p class="signup-error"> This username is taken. </p> 
-        {% endif %}
-        <input class="signup-input" type="password" name="password" placeholder="password" required>
-        <input class="signup-input" type="password" name="confirm-password" placeholder="confirm password" required>
-        {% if passwords_dont_match %}
-        <p class="signup-error"> The passwords don't match. </p> 
-        {% endif %}
-        <input id="signup-button" type="submit" value="SIGN UP">
-    </form> -->
     <form id="login-form" method="post">
         <input class="login-input" type="username" name="username" placeholder="username" required>
         <input class="login-input" type="password" name="password" placeholder="password" required>
         <input id="login-button" type="submit" value="LOGIN">
     </form>
+    <div id="login-cta">
+        <p>Don't have an account yet?</p>
+        <a href="/signup"><h1>SIGN UP</h1></a>
+    </div>
 </div>
 {% endblock %}
