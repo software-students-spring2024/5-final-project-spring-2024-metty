@@ -6,14 +6,17 @@
   <div class="doropomo">
     <img src="/static/images/doropomo.png" alt="doropomo">
   </div>
-  <div class="pomodoro_image">
+  <div class="pomodoro-image">
     
-    <img class="tomato_image" src="/static/images/tomato.png" alt="tomato.png">
-    <!-- <img class="pomodoro_pasta_image" src="/static/images/pomodoro_pasta.png" alt="pomodoro_pasta.png"> -->
-    <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
+    <img class="tomato-image" src="/static/images/tomato.png" alt="tomato.png">
+    <!--<img class="pomodoro-pasta-image" src="/static/images/pomodoro-pasta.png" alt="pomodoro-pasta.png">-->
+    <!--<img class="stirring-pasta-image" src="/static/images/stirring-pasta.png" alt="stirring-pasta.png">-->
    
   </div>
   <p class="time" id="timer">25:00</p>
+  <button class="reset-button">
+    <img class="reset-image" src="/static/images/reset.svg" alt="reset.svg">
+  </button>
   <button class="start-button">START</button>
   <button class="pause-button">PAUSE</button>
 </div>
@@ -27,11 +30,11 @@
 
   let timerInterval;
 
-  // get the buttons
+  // get the buttons and the images
   let startButton = document.querySelector('.start-button');
   let pauseButton = document.querySelector('.pause-button');
 
-  // set initial display states of the buttons
+  // set initial display states of the buttons and the images
   startButton.style.display = "initial";
   pauseButton.style.display = "none";
   
