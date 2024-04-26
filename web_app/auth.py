@@ -38,49 +38,41 @@ def load_user(user_id):
 
 
 def auth_login():
-    if request.method == "POST":
-        user_id = request.form["username"]
-        password = request.form["password"]
-        user = load_user(user_id)
-        if user and user.verify_password(password):
-            # Redirecting to the appropriate page for the logged in user
-            login_user(user)
-            return redirect("/" + user_id + "/decks")
-        else:
-            return render_template(
-                "login.html", invalid_login=True
-            )  # Login failed - render invalid login message
+    user_id = request.form["username"]
+    password = request.form["password"]
+    user = load_user(user_id)
+    if user and user.verify_password(password):
+        # Redirecting to the appropriate page for the logged in user
+        login_user(user)
+        return redirect("/")
     else:
-        return render_template("login.html", invalid_login=False)
+        return render_template(
+            "login.html", invalid_login=True
+        )  # Login failed - render invalid login message
 
 
 def auth_signup():
-    if request.method == "POST":
-        user_id = request.form["username"]
-        password = request.form["password"]
-        confirm_password = request.form["confirm-password"]
-        if load_user(user_id):
-            return render_template(
-                "signup.html", username_taken=True, passwords_dont_match=False
-            )  # Render username taken message
-        elif password != confirm_password:
-            return render_template(
-                "signup.html", username_taken=False, passwords_dont_match=True
-            )  # Render password mismatch message
-        else:
-            # Generating hashed password for user
-            user = User(user_id, generate_password_hash(password))
-            # Adding new user to the database
-            db["users"].insert_one(
-                {"user_id": user.id, "password": user.password, "personalDecks": []}
-            )
-            login_user(user)
-            # Redirect to the appropriate page for the logged in user
-            return redirect("/")
-    else:
+    user_id = request.form["username"]
+    password = request.form["password"]
+    confirm_password = request.form["confirm-password"]
+    if load_user(user_id):
         return render_template(
-            "signup.html", username_taken=False, passwords_dont_match=False
+            "signup.html", username_taken=True, passwords_dont_match=False
+        )  # Render username taken message
+    elif password != confirm_password:
+        return render_template(
+            "signup.html", username_taken=False, passwords_dont_match=True
+        )  # Render password mismatch message
+    else:
+        # Generating hashed password for user
+        user = User(user_id, generate_password_hash(password))
+        # Adding new user to the database
+        db["users"].insert_one(
+            {"user_id": user.id, "password": user.password, "personalDecks": []}
         )
+        login_user(user)
+        # Redirect to the appropriate page for the logged in user
+        return redirect("/")
 
 
 def auth_logout():

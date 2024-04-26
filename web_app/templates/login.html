@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<div class="images-container">
+    <div class="doropomo">
+        <img src="/static/images/doropomo.png" alt="doropomo">
+    </div>
+    <div class="pomodoro_image">
+        
+        <img class="tomato_image" src="/static/images/tomato.png" alt="tomato.png">
+        <!-- <img class="pomodoro_pasta_image" src="/static/images/pomodoro_pasta.png" alt="pomodoro_pasta.png"> -->
+        <!-- <img class="stirring_pasta_image" src="/static/images/stirring_pasta.png" alt="stirring_pasta.png"> -->
+        
+    </div>
+    <form id="login-form" method="post">
+        <input class="login-input" type="username" name="username" placeholder="username" required>
+        <input class="login-input" type="password" name="password" placeholder="password" required>
+        {% if invalid_login %}
+        <p class="login-error"> Password or username is invalid </p> 
+        {% endif %}
+        <input id="login-button" type="submit" value="LOGIN">
+    </form>
+    <div id="login-cta">
+        <p>Don't have an account yet?</p>
+        <a href="/signup"><h1>SIGN UP</h1></a>
+    </div>
+</div>
+{% endblock %}

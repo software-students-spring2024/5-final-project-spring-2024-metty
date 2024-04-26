@@ -32,6 +32,14 @@ def render_signup():
 def signup():
     return auth_signup()
 
+@app.route("/login", methods=["GET"])
+def render_login():
+    return render_template("login.html")
+
+@app.route('/login', methods=["POST"])
+def login():
+    return auth_login()
+
 @app.route("/<username>/time-studied", methods=["POST"])
 def insert_time_studied(username):
     """

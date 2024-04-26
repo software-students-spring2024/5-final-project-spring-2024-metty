@@ -113,13 +113,11 @@ body {
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
+    color: #463331;
 }
 
 #signup-button {
-    /* position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -139,4 +137,77 @@ body {
     font-size: 20px;
     padding-left: 20px;
     margin: 2px;
+}
+
+#signup-cta{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    color: #463331;
+}
+
+#signup-cta p {
+    margin: 0px;
+}
+
+#signup-cta h1 {
+    margin: 0px;
+}
+
+#signup-cta a {
+    color: inherit;
+}
+
+/* LOGIN FORM */
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #463331;
+}
+
+#login-button {
+    color: #FAFAFA;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    font-size: 70px;
+    font-family: 'Single Day', sans-serif;
+}
+
+.login-input::placeholder {
+    color: rgba(128,128,128,0.5);
+}
+
+.login-input {
+    height: 40px;
+    width: 300px;
+    font-family: 'Single Day', sans-serif;
+    font-size: 20px;
+    padding-left: 20px;
+    margin: 2px;
+}
+
+#login-cta{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    color: #463331;
+}
+
+#login-cta p {
+    margin: 0px;
+}
+
+#login-cta h1 {
+    margin: 0px;
+}
+
+#login-cta a {
+    color: inherit;
 }
