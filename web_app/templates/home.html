@@ -13,7 +13,10 @@
   </div>
   <p class="time" id="timer">25:00</p>
   <button class="reset-button">
-    <img class="reset-image" src="/static/images/reset.svg" alt="reset.svg">
+    <i class="fa-solid fa-arrow-rotate-left fa-2xs"></i>
+  </button>
+  <button class="forward-button">
+    <i class="fa-solid fa-forward fa-2xs"></i>
   </button>
   <button class="start-button">START</button>
   <button class="pause-button">PAUSE</button>
@@ -44,6 +47,7 @@
   let startButton = document.querySelector('.start-button');
   let pauseButton = document.querySelector('.pause-button');
   let resetButton = document.querySelector('.reset-button');
+  let forwardButton = document.querySelector('.forward-button');
   let tomatoImage = document.querySelector('.tomato-image');
   let pomodoroPastaImage = document.querySelector('.pomodoro-pasta-image');
   let stirringPastaImage = document.querySelector('.stirring-pasta-image');
@@ -55,6 +59,7 @@
   startButton.addEventListener('click', startTimer);
   pauseButton.addEventListener('click', pauseTimer);
   resetButton.addEventListener('click', resetTimer);
+  forwardButton.addEventListener('click', forwardTimer);
 
   function startTimer() {
     // update the countdown timer every second
@@ -62,6 +67,7 @@
 
     showPauseButton();
     resetButton.style.display = "initial";
+    forwardButton.style.display = "initial";
     showStirringPastaImage();
 
     currentState = TimerState.WORK;
@@ -85,8 +91,15 @@
     showTomatoImage();
     showStartButton();
     resetButton.style.display = "none";
+    forwardButton.style.display = "none";
 
     currentState = TimerState.BEGINNING;
+  }
+
+  function forwardTimer() {
+    // TODO: Here we need to send information to the server about how much the user has studied
+    // finish method
+
   }
 
   // update countdown

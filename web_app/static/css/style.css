@@ -9,9 +9,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
     background-color: #BFB0AD;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .header-bar .logo img {
@@ -96,8 +96,21 @@ body {
 .reset-button {
     font-family: 'Single Day', sans-serif;
     position: absolute;
-    top: 72%;
-    left: 40%;
+    top: 73%;
+    left: 41.5%;
+    transform: translate(-50%, -50%);
+    color: #FAFAFA;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    font-size: 70px;
+}
+
+.forward-button {
+    font-family: 'Single Day', sans-serif;
+    position: absolute;
+    top: 73%;
+    left: 58.5%;
     transform: translate(-50%, -50%);
     color: #FAFAFA;
     border: none;
