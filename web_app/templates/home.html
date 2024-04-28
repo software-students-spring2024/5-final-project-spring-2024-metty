@@ -24,7 +24,8 @@
 
 <!-- countdown timer -->
 <script>
-  const TIME_LIMIT = 25 * 60;
+  const WORK_TIME = 25 * 60;
+  const REST_TIME = 5 * 60;
 
   /*
   * This enum stores the state timer is in.
@@ -32,15 +33,12 @@
   * Also, we can show different images after work is over, and after break is over.
   */
   const TimerState = Object.freeze({ 
-    BEGINNING: 0,
-    WORKING: 1,
-    PAUSED: 2,
-    ON_BREAK: 3,
+    WORK: 0,
+    REST: 1,
   }); 
 
-  let timeLeftInSeconds = TIME_LIMIT;
+  let timeLeftInSeconds;
   let timerElement = document.getElementById('timer');
-
   let timerInterval;
 
   // get the buttons and the images
@@ -53,6 +51,7 @@
   let stirringPastaImage = document.querySelector('.stirring-pasta-image');
 
   // set initial state of the timer
+  let currentState = TimerState.WORK;
   resetTimer();
   
   // add event listeners to buttons 
@@ -68,24 +67,25 @@
     showPauseButton();
     resetButton.style.display = "initial";
     forwardButton.style.display = "initial";
-    showStirringPastaImage();
-
-    currentState = TimerState.WORK;
+    if (currentState == TimerState.WORK) {
+      showStirringPastaImage();
+    } else {
+      showPomodoroPastaImage();
+    }
   }
 
   function pauseTimer() {
     clearInterval(timerInterval); // stops the countdown
     showStartButton();
-
-    currentState = TimerState.PAUSED;
   }
 
   function resetTimer() {
+    console.log(currentState);
     // TODO: Here we need to send information to the server about how much the user has studied
     clearInterval(timerInterval);
 
     // reset time left and the text
-    timeLeftInSeconds = TIME_LIMIT;
+    timeLeftInSeconds = (currentState == TimerState.WORK) ? WORK_TIME : REST_TIME;
     timerElement.textContent = getTimeAsString(timeLeftInSeconds);
 
     showTomatoImage();
@@ -93,13 +93,13 @@
     resetButton.style.display = "none";
     forwardButton.style.display = "none";
 
-    currentState = TimerState.BEGINNING;
   }
 
   function forwardTimer() {
     // TODO: Here we need to send information to the server about how much the user has studied
-    // finish method
-
+    // switch current state
+    currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
+    resetTimer();
   }
 
   // update countdown
@@ -145,9 +145,6 @@
     if (totalSeconds < 0) return '00:00';
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
-    if (minutes < 10) {
-      minutes = '0' + minutes;
-    }
     if (seconds < 10) {
       seconds = '0' + seconds;
     }
