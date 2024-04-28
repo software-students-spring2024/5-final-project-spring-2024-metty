@@ -48,35 +48,28 @@ def test():
     print(request.form["studied_time"])
     return 'test'
 
-@app.route("/<username>/time-studied", methods=["POST"])
-def insert_time_studied(username):
-    """
-    add to database amount of time in study mode
-    """
-    # authenticate user
-    if not current_user.is_authenticated or current_user.id != username:
-        return
-
-    studied_time = 5  # TODO: retrieve time somehow
+@app.route("/time-studied", methods=["POST"])
+def insert_time_studied():
+    studied_time = int(request.form["studied_time"])  # TODO: retrieve time somehow
 
     # get today's date
     todays_date = datetime.now().strftime(
         "%Y-%m-%d"
     )  # date is now in format: 2024-04-22
 
-    user = db.users.find_one({"user_id": username})
+    user = db.users.find_one({"user_id": current_user.id})
 
     studied_time_already = user.get("time_in_study_mode", {}).get(todays_date, 0)
 
     studied_time += studied_time_already
 
     db.users.update_one(
-        {"user_id": username},
+        {"user_id": current_user.id},
         {"$set": {f"time_in_study_mode.{todays_date}": studied_time}},
         upsert=True,  # create field if it doesn't exist
     )
 
-    return  # return success?
+    return "200"
 
 
 if __name__ == "__main__":

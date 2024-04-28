@@ -101,7 +101,7 @@
     if (currentState == TimerState.WORK) {
       const form = new FormData()
       form.append("studied_time", WORK_TIME - timeLeftInSeconds)
-      const response = await fetch("/test", {
+      const response = await fetch("/time-studied", {
         method: 'POST',
         body: form
       })
