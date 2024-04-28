@@ -18,7 +18,11 @@
             <div class="menu">
                 <a href="/activity">ACTIVITY</a>
                 <a href="/settings">SETTINGS</a>
+                {% if isLoggedIn %}
+                <a href="/logout">LOG OUT</a>
+                {% else %}
                 <a href="/login">LOG IN</a>
+                {% endif %}
             </div>
         </div>
         <main>{% block container %} {% endblock %}</main>
