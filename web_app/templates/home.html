@@ -54,7 +54,7 @@
 
   // set initial state of the timer
   let currentState = TimerState.WORK;
-  resetTimer();
+  clearTimer();
   
   // add event listeners to buttons 
   startButton.addEventListener('click', startTimer);
@@ -76,13 +76,7 @@
     }
   }
 
-  function pauseTimer() {
-    clearInterval(timerInterval); // stops the countdown
-    showStartButton();
-  }
-
-  function resetTimer() {
-    // console.log(currentState);
+  function clearTimer() {
     // TODO: Here we need to send information to the server about how much the user has studied
     clearInterval(timerInterval);
 
@@ -97,6 +91,23 @@
 
   }
 
+  function pauseTimer() {
+    clearInterval(timerInterval); // stops the countdown
+    showStartButton();
+  }
+
+  async function resetTimer() {
+    if (currentState == TimerState.WORK) {
+      const form = new FormData()
+      form.append("studied_time", WORK_TIME - timeLeftInSeconds)
+      const response = await fetch("/time-studied", {
+        method: 'POST',
+        body: form
+      })
+    }
+    clearTimer()
+  }
+
   async function forwardTimer() {
     if (currentState == TimerState.WORK) {
       const form = new FormData()
@@ -108,7 +119,7 @@
     }
     // switch current state
     currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
-    resetTimer();
+    clearTimer();
   }
 
   // update countdown
@@ -125,7 +136,7 @@
       }
       // switch current state
       currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
-      resetTimer();
+      clearTimer();
     }
     timerElement.textContent = getTimeAsString(timeLeftInSeconds);
   }
