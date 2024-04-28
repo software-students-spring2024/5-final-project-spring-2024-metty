@@ -48,7 +48,7 @@ def insert_time_studied():
     if (not current_user.is_authenticated):
         return "not authorized", 401
 
-    studied_time = int(request.form["studied_time"])  # TODO: retrieve time somehow
+    studied_time = int(request.form["studied_time"])
 
     # get today's date
     todays_date = datetime.now().strftime(
