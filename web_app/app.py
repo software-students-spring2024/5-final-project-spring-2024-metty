@@ -43,6 +43,11 @@ def login():
 def logout():
     return auth_logout()
 
+@app.route('/test', methods=["POST"])
+def test():
+    print(request.form["studied_time"])
+    return 'test'
+
 @app.route("/<username>/time-studied", methods=["POST"])
 def insert_time_studied(username):
     """
