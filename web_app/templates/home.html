@@ -25,8 +25,9 @@
 <!-- countdown timer -->
 <script>
   // const WORK_TIME = 25 * 60;
+  // const REST_TIME = 5 * 60;
   const WORK_TIME = 10;
-  const REST_TIME = 5 * 60;
+  const REST_TIME = 5;
 
   /*
   * This enum stores the state timer is in.
@@ -111,20 +112,13 @@
   }
 
   // update countdown
-  async function updateTimer() {
+  function updateTimer() {
     timeLeftInSeconds--;
     if (timeLeftInSeconds < 0) {
-      if (currentState == TimerState.WORK) {
-          const form = new FormData()
-          form.append("studied_time", WORK_TIME)
-          const response = await fetch("/time-studied", {
-            method: 'POST',
-            body: form
-          })
-      }
-      // TODO: Here we need to send information to the server about how much the user has studied
-      clearInterval(timerInterval);
-      return;
+
+      // switch current state
+      currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
+      resetTimer();
     }
     timerElement.textContent = getTimeAsString(timeLeftInSeconds);
   }
