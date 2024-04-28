@@ -96,8 +96,6 @@
   }
 
   async function forwardTimer() {
-    // TODO: Here we need to send information to the server about how much the user has studied
-    // switch current state
     if (currentState == TimerState.WORK) {
       const form = new FormData()
       form.append("studied_time", WORK_TIME - timeLeftInSeconds)
@@ -106,6 +104,7 @@
         body: form
       })
     }
+    // switch current state
     currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
     resetTimer();
   }
