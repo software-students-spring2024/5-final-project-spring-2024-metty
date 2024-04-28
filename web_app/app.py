@@ -50,6 +50,9 @@ def test():
 
 @app.route("/time-studied", methods=["POST"])
 def insert_time_studied():
+    if (not current_user.is_authenticated):
+        return "not authorized", 401
+
     studied_time = int(request.form["studied_time"])  # TODO: retrieve time somehow
 
     # get today's date
@@ -69,7 +72,7 @@ def insert_time_studied():
         upsert=True,  # create field if it doesn't exist
     )
 
-    return "200"
+    return "success", 200
 
 
 if __name__ == "__main__":
