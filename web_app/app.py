@@ -19,10 +19,9 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    """
-    default page
-    """
-    return render_template("home.html")
+    if (current_user.is_authenticated):
+        return render_template("home.html", isLoggedIn = True)
+    return render_template("home.html", isLoggedIn = False)
 
 @app.route("/signup", methods=["GET"])
 def render_signup():
@@ -39,6 +38,10 @@ def render_login():
 @app.route('/login', methods=["POST"])
 def login():
     return auth_login()
+
+@app.route('/logout')
+def logout():
+    return auth_logout()
 
 @app.route("/<username>/time-studied", methods=["POST"])
 def insert_time_studied(username):

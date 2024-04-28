@@ -16,9 +16,15 @@
                 <img src="{{ url_for('static', filename='images/tomato.png') }}" alt="Logo">
             </a>
             <div class="menu">
+                {% if isLoggedIn %}
+                <a href="/activity">ACTIVITY</a>
+                <a href="/settings">SETTINGS</a>
+                <a href="/logout">LOG OUT</a>
+                {% else %}
                 <a href="/activity">ACTIVITY</a>
                 <a href="/settings">SETTINGS</a>
                 <a href="/login">LOG IN</a>
+                {% endif %}
             </div>
         </div>
         <main>{% block container %} {% endblock %}</main>
