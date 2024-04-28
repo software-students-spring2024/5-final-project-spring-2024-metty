@@ -112,10 +112,16 @@
   }
 
   // update countdown
-  function updateTimer() {
+  async function updateTimer() {
     timeLeftInSeconds--;
     if (timeLeftInSeconds < 0) {
-
+      if (currentState == TimerState.WORK) {
+        const form = new FormData()
+        const response = await fetch("/time-studied", {
+          method: 'POST',
+          body: form
+        })
+      }
       // switch current state
       currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
       resetTimer();
