@@ -82,7 +82,7 @@
   }
 
   function resetTimer() {
-    console.log(currentState);
+    // console.log(currentState);
     // TODO: Here we need to send information to the server about how much the user has studied
     clearInterval(timerInterval);
 
@@ -117,6 +117,7 @@
     if (timeLeftInSeconds < 0) {
       if (currentState == TimerState.WORK) {
         const form = new FormData()
+        form.append("studied_time", WORK_TIME)
         const response = await fetch("/time-studied", {
           method: 'POST',
           body: form
