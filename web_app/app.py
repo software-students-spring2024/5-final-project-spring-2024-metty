@@ -45,7 +45,7 @@ def logout():
 
 @app.route('/test')
 def test():
-    return "test"
+    return "testing"
 
 @app.route("/time-studied", methods=["POST"])
 def insert_time_studied():
