@@ -53,6 +53,7 @@
   // set initial state of the timer
   let currentState = TimerState.WORK;
   clearTimer();
+  showTomatoImage(); // Show tomato image when the page is refreshed
   
   // add event listeners to buttons 
   startButton.addEventListener('click', startTimer);
@@ -77,15 +78,22 @@
   function clearTimer() {
     clearInterval(timerInterval);
 
-    // reset time left and the text
-    timeLeftInSeconds = (currentState == TimerState.WORK) ? WORK_TIME : REST_TIME;
+    // reset the time left and the image
+    if (currentState == TimerState.WORK) {
+      timeLeftInSeconds = WORK_TIME;
+      showStirringPastaImage();
+    } else {
+      timeLeftInSeconds = REST_TIME;
+      showPomodoroPastaImage();
+    }
+
+    // apply the time left as string
     timerElement.textContent = getTimeAsString(timeLeftInSeconds);
 
-    showTomatoImage();
+    // reset the buttons
     showStartButton();
     resetButton.style.display = "none";
     forwardButton.style.display = "none";
-
   }
 
   function pauseTimer() {
