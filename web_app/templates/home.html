@@ -27,6 +27,9 @@
   const WORK_TIME = 25 * 60;
   const REST_TIME = 5 * 60;
 
+  const EATING_FRAME_COUNT = 5;
+  const STIRRING_FRAME_COUNT = 18;
+
   /*
   * This enum stores the state timer is in.
   * This info is useful when skipping from break to work, and vice versa.
@@ -57,6 +60,9 @@
   let tomatoImage = document.querySelector('.tomato-image');
   let pomodoroPastaImage = document.querySelector('.pomodoro-pasta-image');
   let stirringPastaImage = document.querySelector('.stirring-pasta-image');
+
+  let stirringPastaFrames = loadImages("stirring-pasta", STIRRING_FRAME_COUNT);
+  let eatingPastaFrames = loadImages("pomodoro-pasta", EATING_FRAME_COUNT);
 
   // set initial state of the timer
   let currentState = TimerState.WORK;
@@ -190,7 +196,7 @@
 
     pomodoroPastaImage.style.display = "initial";
     eatingFrameNum = frameNum; // we set eatingFrameNum so when we play animation we play it from that frame
-    pomodoroPastaImage.src = "/static/images/pomodoro-pasta/" + eatingFrameNum + ".png";
+    pomodoroPastaImage.src = eatingPastaFrames[eatingFrameNum].src;
 
     stirringPastaImage.style.display = "none";
     clearInterval(stirringInterval);
@@ -205,19 +211,20 @@
 
     stirringPastaImage.style.display = "initial";
     stirringFrameNum = frameNum; // we set stirringFrameNum so when we play animation we play it from that frame
-    stirringPastaImage.src = "/static/images/stirring-pasta/" + stirringFrameNum + ".png";
+    stirringPastaImage.src = stirringPastaFrames[stirringFrameNum].src;
   }
 
   async function stirPasta() {
     stirringFrameNum++;
-    if (stirringFrameNum > 17) stirringFrameNum = 0;
-    stirringPastaImage.src = "/static/images/stirring-pasta/" + stirringFrameNum + ".png";
+    if (stirringFrameNum >= STIRRING_FRAME_COUNT) stirringFrameNum = 0;
+    stirringPastaImage.src = stirringPastaFrames[stirringFrameNum].src;
   }
 
   async function eatPasta() {
     eatingFrameNum++;
-    if (eatingFrameNum > 4) eatingFrameNum = 0;
-    pomodoroPastaImage.src = "/static/images/pomodoro-pasta/" + eatingFrameNum + ".png";
+    if (eatingFrameNum >= EATING_FRAME_COUNT) eatingFrameNum = 0;
+    pomodoroPastaImage.src = eatingPastaFrames[eatingFrameNum].src;
+
   }
 
   function getTimeAsString(totalSeconds) {
@@ -229,6 +236,16 @@
     }
     return minutes + ':' + seconds;
   }
+
+  function loadImages(directoryName, frameCount) {
+    let images = [];
+    for (var i = 0; i < frameCount; i++) {
+        var img = new Image();
+        img.src = "/static/images/" + directoryName + "/" + i + ".png";
+        images.push(img);
+    }
+    return images;
+  } 
 
 </script>
 
