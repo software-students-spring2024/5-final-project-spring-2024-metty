@@ -1,6 +1,6 @@
 
 ![web_app testing badge](https://github.com/software-students-spring2024/5-final-project-spring-2024-metty/actions/workflows/web_app.yml/badge.svg)
-![web_app docker image publish badge](https://github.com/software-students-spring2024/5-final-project-spring-2024-metty/actions/workflows/web_app_docker.yml/badge.svg)
+![web_app docker image publish, digital ocean deploy badge](https://github.com/software-students-spring2024/5-final-project-spring-2024-metty/actions/workflows/dockeranddeploy.yml/badge.svg)
 
 # DoroPomo
 
