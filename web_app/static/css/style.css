@@ -37,6 +37,10 @@ body {
     margin-right: 20;
 }
 
+.menu a:hover {
+    cursor: pointer;
+}
+
 /* IMAGES */
 .images-container {
     display: flex;
