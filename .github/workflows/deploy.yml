@@ -1,8 +1,0 @@
-name: digital ocean deploy
-
-concurrency: production
-
-on:
-  push:
-    branches:
-      - main    
