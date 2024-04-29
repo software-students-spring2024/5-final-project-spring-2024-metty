@@ -22,18 +22,24 @@
   <button class="pause-button">PAUSE</button>
 </div>
 
-
-
 <!-- Settings Modal -->
-
-<div id="settings-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
+<div id="settings-modal" class="settings-modal">
+  <div class="settings-modal-content">
+    <div class="close">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    <h1>SETTINGS</h1>
     <form id="settings-form" method="post">
-      <p>STUDY</p>
-      <input id="study-time" type="text" value="25" required>
-      <p>BREAK</p>
-      <input id="break-time" type="text" value="5" required>
+      <div class="card-container">
+        <div class="card">
+          <p>STUDY</p>
+          <input class="mini-card" id="study-time" type="text" value="25" required>  
+        </div>
+        <div class="card">
+          <p>BREAK</p>
+          <input class="mini-card" id="break-time" type="text" value="5" required>  
+        </div>  
+      </div>
       <button type="submit">OK</button>
     </form>
   </div>
