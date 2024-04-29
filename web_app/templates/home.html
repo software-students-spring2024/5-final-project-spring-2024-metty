@@ -22,10 +22,72 @@
   <button class="pause-button">PAUSE</button>
 </div>
 
+
+
+<!-- Settings Modal -->
+
+<div id="settings-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="settings-form" method="post">
+      <p>STUDY</p>
+      <input id="study-time" type="text" value="25" required>
+      <p>BREAK</p>
+      <input id="break-time" type="text" value="5" required>
+      <button type="submit">OK</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let modal = document.getElementById("settings-modal");
+  let closeButton = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on x button, close the modal
+  closeButton.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // handle submit of settings modal
+  let settingsForm = document.getElementById("settings-form");
+  
+  // Listen for the custom event to open the settings modal
+  document.addEventListener("openSettingsModal", function() {
+    modal.style.display = "block";
+  });
+
+  settingsForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    WORK_TIME_MIN = parseInt(document.getElementById("study-time").value);
+    REST_TIME_MIN = parseInt(document.getElementById("break-time").value);
+    WORK_TIME_SEC = WORK_TIME_MIN * 60;
+    REST_TIME_SEC = REST_TIME_MIN * 60;
+
+    // change the timer html
+    document.getElementById('timer').innerHTML = WORK_TIME_MIN + ":00";
+    // Reset the timer with new values
+    resetTimer();
+    // Close the modal
+    modal.style.display = "none";
+  });
+
+</script>
+
+
+
 <!-- countdown timer -->
 <script>
-  const WORK_TIME = 25 * 60;
-  const REST_TIME = 5 * 60;
+  let WORK_TIME_MIN = 25;
+  let REST_TIME_MIN = 5
+  let WORK_TIME_SEC = WORK_TIME_MIN * 60;
+  let REST_TIME_SEC = REST_TIME_MIN * 60;
 
   /*
   * This enum stores the state timer is in.
@@ -85,14 +147,13 @@
     clearInterval(timerInterval);
 
     // reset time left and the text
-    timeLeftInSeconds = (currentState == TimerState.WORK) ? WORK_TIME : REST_TIME;
+    timeLeftInSeconds = (currentState == TimerState.WORK) ? WORK_TIME_SEC : REST_TIME_SEC;
     timerElement.textContent = getTimeAsString(timeLeftInSeconds);
 
     showTomatoImage();
     showStartButton();
     resetButton.style.display = "none";
     forwardButton.style.display = "none";
-
   }
 
   function forwardTimer() {
