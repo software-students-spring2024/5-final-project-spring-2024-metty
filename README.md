@@ -8,6 +8,10 @@ DoroPomo is a gamified Pomodoro web application designed to enhance productivity
 
 Logged-in users can delve into their productivity patterns through the Data Analysis tab, where they can visualize their usage trends with informative graphs and statistics. DoroPomo encourages users to stay engaged and motivated by offering a diverse range of animations, making the journey towards enhanced productivity both enjoyable and rewarding.
 
+# Deployment
+
+Check our deployed app [here](http://167.71.252.118:5000)!
+
 # Dockerhub Images
 
 [web_app image](https://hub.docker.com/r/teammetty4eva/web_app)
