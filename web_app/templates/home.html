@@ -8,8 +8,8 @@
   </div>
   <div class="pomodoro-image">
     <img class="tomato-image" src="/static/images/tomato.png" alt="tomato.png">
-    <img class="pomodoro-pasta-image" src="/static/images/pomodoro-pasta.png" alt="pomodoro-pasta.png">
-    <img class="stirring-pasta-image" src="/static/images/stirring-pasta.png" alt="stirring-pasta.png">
+    <img class="pomodoro-pasta-image" src="/static/images/pomodoro-pasta/0.png" alt="pomodoro-pasta.png">
+    <img class="stirring-pasta-image" src="/static/images/stirring-pasta/0.png" alt="stirring-pasta.png">
   </div>
   <p class="time" id="timer">25:00</p>
   <button class="reset-button">
@@ -41,6 +41,14 @@
   let timerElement = document.getElementById('timer');
   let timerInterval;
 
+  // we set this interval when we want to play the corresponding animations, and clear when we wan't to pause them 
+  let stirringInterval; 
+  let eatingInterval;
+
+  // these variable hold which frame of the corresponding animations we show
+  let stirringFrameNum = 0;
+  let eatingFrameNum = 0;
+
   // get the buttons and the images
   let startButton = document.querySelector('.start-button');
   let pauseButton = document.querySelector('.pause-button');
@@ -63,28 +71,36 @@
 
   function startTimer() {
     // update the countdown timer every second
+    clearInterval(timerInterval); // clear interval before setting to avoid setting twice
     timerInterval = setInterval(updateTimer, 1000);
+
+    if (currentState == TimerState.WORK) {
+      clearInterval(stirringInterval);
+      stirringInterval = setInterval(stirPasta, 150);
+      showStirringPastaImage(stirringFrameNum);
+    } else {
+      clearInterval(eatingInterval); 
+      eatingInterval = setInterval(eatPasta, 500);
+      showPomodoroPastaImage(eatingFrameNum);
+    }
 
     showPauseButton();
     resetButton.style.display = "initial";
     forwardButton.style.display = "initial";
-    if (currentState == TimerState.WORK) {
-      showStirringPastaImage();
-    } else {
-      showPomodoroPastaImage();
-    }
   }
 
   function clearTimer() {
-    clearInterval(timerInterval);
+    clearInterval(timerInterval); // stops the countdown
+    clearInterval(stirringInterval); // stops the stirring of the pasta if it's being shown
+    clearInterval(eatingInterval); // stops the eating of the pasta if it's being shown
 
     // reset the time left and the image
     if (currentState == TimerState.WORK) {
       timeLeftInSeconds = WORK_TIME;
-      showStirringPastaImage();
+      showStirringPastaImage(0);
     } else {
       timeLeftInSeconds = REST_TIME;
-      showPomodoroPastaImage();
+      showPomodoroPastaImage(0);
     }
 
     // apply the time left as string
@@ -98,6 +114,8 @@
 
   function pauseTimer() {
     clearInterval(timerInterval); // stops the countdown
+    clearInterval(stirringInterval); // stops the stirring of the pasta if it's being shown
+    clearInterval(eatingInterval); // stops the eating of the pasta if it's being shown
     showStartButton();
   }
 
@@ -158,20 +176,48 @@
 
   function showTomatoImage() {
     tomatoImage.style.display = "initial";
+
     pomodoroPastaImage.style.display = "none";
+    clearInterval(eatingInterval);
+
     stirringPastaImage.style.display = "none";
+    clearInterval(stirringInterval);
   }
 
-  function showPomodoroPastaImage() {
+  // frame number sets which frame of the image to show 
+  function showPomodoroPastaImage(frameNum) {
     tomatoImage.style.display = "none";
+
     pomodoroPastaImage.style.display = "initial";
+    eatingFrameNum = frameNum; // we set eatingFrameNum so when we play animation we play it from that frame
+    pomodoroPastaImage.src = "/static/images/pomodoro-pasta/" + eatingFrameNum + ".png";
+
     stirringPastaImage.style.display = "none";
+    clearInterval(stirringInterval);
   }
 
-  function showStirringPastaImage() {
+  // frame number sets which frame of the image to show 
+  function showStirringPastaImage(frameNum) {
     tomatoImage.style.display = "none";
+
     pomodoroPastaImage.style.display = "none";
+    clearInterval(eatingInterval);
+
     stirringPastaImage.style.display = "initial";
+    stirringFrameNum = frameNum; // we set stirringFrameNum so when we play animation we play it from that frame
+    stirringPastaImage.src = "/static/images/stirring-pasta/" + stirringFrameNum + ".png";
+  }
+
+  async function stirPasta() {
+    stirringFrameNum++;
+    if (stirringFrameNum > 17) stirringFrameNum = 0;
+    stirringPastaImage.src = "/static/images/stirring-pasta/" + stirringFrameNum + ".png";
+  }
+
+  async function eatPasta() {
+    eatingFrameNum++;
+    if (eatingFrameNum > 4) eatingFrameNum = 0;
+    pomodoroPastaImage.src = "/static/images/pomodoro-pasta/" + eatingFrameNum + ".png";
   }
 
   function getTimeAsString(totalSeconds) {
