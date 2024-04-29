@@ -6,7 +6,7 @@ services:
     ports: 
       - "27017:27017"
   web_app:
-    build: ./web_app
+    image: teammetty4eva/web_app:main
     ports:
       - "5000:5000"
     depends_on:
