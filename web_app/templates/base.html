@@ -7,6 +7,8 @@
       href="{{ url_for('static', filename='css/style.css') }}"
     />
     <script src="https://kit.fontawesome.com/1f2ae74b43.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
   </head>
   
   <body>
@@ -21,7 +23,8 @@
                 <a href="/settings">SETTINGS</a>
                 <a href="/logout">LOG OUT</a>
                 {% else %}
-                <a href="/activity">ACTIVITY</a>
+                <!--a href="/#" class="popup-trigger" data-popup="activity">ACTIVITY</-->
+                <button id="activityBtn">Activity</button>
                 <a href="/settings">SETTINGS</a>
                 <a href="/login">LOG IN</a>
                 {% endif %}
@@ -29,5 +32,14 @@
         </div>
         <main>{% block container %} {% endblock %}</main>
     </div>
+
+    <div id="popup" class="popup">
+      <div class="popup-content">
+          <span class="close">&times;</span>
+          <div id="activityData"></div>
+      </div>
+  </div>
+
   </body>
+
 </html>

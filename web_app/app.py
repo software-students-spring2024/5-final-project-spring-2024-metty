@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from db import *
@@ -68,6 +68,13 @@ def insert_time_studied():
     )
 
     return "success", 200
+
+@app.route("/activity-data", methods=["GET"])
+def get_activity_data():
+    # get acitvity data
+    # TO DO: need to obtain from database
+    activity_data = { '2024-04-28': 55 }
+    return jsonify(activity_data)
 
 
 if __name__ == "__main__":
