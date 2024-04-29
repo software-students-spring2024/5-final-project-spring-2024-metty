@@ -43,6 +43,10 @@ def login():
 def logout():
     return auth_logout()
 
+@app.route('/test')
+def test():
+    return "test"
+
 @app.route("/time-studied", methods=["POST"])
 def insert_time_studied():
     if (not current_user.is_authenticated):
