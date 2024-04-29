@@ -43,6 +43,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   deployment:
+    name: Deploy to Digital Ocean
     needs: push_to_registry
     runs-on: ubuntu-latest
     steps:
@@ -53,5 +54,8 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         script: |
-          whoami
-          ls -al
+          cd 5-final-project-spring-2024-metty
+          docker-compose stop
+          docker-compose rm -f
+          docker-compose pull   
+          docker-compose up -d
