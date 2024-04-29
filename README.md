@@ -38,5 +38,9 @@ From the root dir, run
 
 Then, make a .env with `MONGO_URI=mongodb://localhost:27017/` and `SECRET_KEY=dev` in the root dir. You can now `pipenv install` and `pipenv shell` in the web_app dir.
 
+## To check code coverage:
+
+Navigate to the `web_app` directory, and run `coverage run -m pytest` and then `coverage report -m`
+
 ## Figma file
 https://www.figma.com/file/24LGaSUtQbYkMu7X7xB6Nf/doropomo?type=design&node-id=0-1&mode=design&t=YfX4QiaG4TQj6vn1-0
