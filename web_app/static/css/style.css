@@ -49,19 +49,19 @@ body {
 }
 
 .doropomo img {
-    width: 580px;
+    width: 45vw;
 }
 
 .tomato-image {
-    width: 500px;
+    width: 35vw;
 }
 
 .pomodoro-pasta-image {
-    width: 650px;
+    width: 35vw;
 }
 
 .stirring-pasta-image {
-    width: 600px;
+    width: 35vw;
     transform: rotate(-2deg); 
 }
 
@@ -85,7 +85,7 @@ body {
 
 .forward-button {
     font-family: 'Single Day', sans-serif;
-    color: black
+    color: black;
     border: none;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
