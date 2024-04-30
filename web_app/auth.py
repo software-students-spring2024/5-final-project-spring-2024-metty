@@ -67,9 +67,7 @@ def auth_signup():
         # Generating hashed password for user
         user = User(user_id, generate_password_hash(password))
         # Adding new user to the database
-        db["users"].insert_one(
-            {"user_id": user.id, "password": user.password}
-        )
+        db["users"].insert_one({"user_id": user.id, "password": user.password})
         login_user(user)
         # Redirect to the appropriate page for the logged in user
         return redirect("/")

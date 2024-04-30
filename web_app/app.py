@@ -13,39 +13,46 @@ load_dotenv()
 app = Flask(__name__)
 login_manager.init_app(app)
 
-# Secret key for login session management, set this up in your .env file 
+# Secret key for login session management, set this up in your .env file
 load_dotenv()
 app.secret_key = os.getenv("SECRET_KEY")
 
+
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if (current_user.is_authenticated):
-        return render_template("home.html", isLoggedIn = True)
-    return render_template("home.html", isLoggedIn = False)
+    if current_user.is_authenticated:
+        return render_template("home.html", isLoggedIn=True)
+    return render_template("home.html", isLoggedIn=False)
+
 
 @app.route("/signup", methods=["GET"])
 def render_signup():
     return render_template("signup.html")
 
+
 @app.route("/signup", methods=["POST"])
 def signup():
     return auth_signup()
+
 
 @app.route("/login", methods=["GET"])
 def render_login():
     return render_template("login.html")
 
-@app.route('/login', methods=["POST"])
+
+@app.route("/login", methods=["POST"])
 def login():
     return auth_login()
 
-@app.route('/logout')
+
+@app.route("/logout")
 def logout():
     return auth_logout()
 
+
 @app.route("/time-studied", methods=["POST"])
 def insert_time_studied():
-    if (not current_user.is_authenticated):
+    if not current_user.is_authenticated:
         return "not authorized", 401
 
     studied_time = int(request.form["studied_time"])
