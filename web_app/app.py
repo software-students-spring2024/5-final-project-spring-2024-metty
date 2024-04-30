@@ -73,8 +73,21 @@ def insert_time_studied():
 def get_activity_data():
     # get acitvity data
     # TO DO: need to obtain from database
+    hours_week = 5
+    days = 6
+    temp = 2
+    day_hours = {'Mon': 5, 'Tue': 2, 'Wed': 0}
     activity_data = { '2024-04-28': 55 }
-    return jsonify(activity_data)
+
+    jsonified_items = jsonify({
+        "hours_week": hours_week,
+        "days": days,
+        "temp": temp,
+        "day_hours": day_hours,
+        "activity_data": activity_data
+    })
+
+    return jsonified_items
 
 
 if __name__ == "__main__":

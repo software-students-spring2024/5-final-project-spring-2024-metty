@@ -35,10 +35,28 @@
 
     <div id="popup" class="popup">
       <div class="popup-content">
-        <!--div class="popup-container"></div-->
-          <span class="close">&times;</span>
-          <div id="activityData"></div>
-        <!--/div-->
+        <div class="stat">
+            <h2>Hours Worked</h2>
+            <p id="hoursWorked"></p>
+        </div>
+        <div class="stat">
+            <h2>Days Worked</h2>
+            <p id="daysWorked"></p>
+        </div>
+        <div class="stat">
+            <h2>Day Streak</h2>
+            <p id="dayStreak"></p>
+        </div>
+        <div class="graph">
+            <h2>Day Hours</h2>
+            <canvas id="dayHoursChart"></canvas>
+        </div>
+        <div class="graph">
+            <h2>Activity Data</h2>
+            <canvas id="activityDataChart"></canvas>
+        </div>
+        <span class="close">&times;</span>
+        <div id="activityData"></div>
       </div>
   </div>
 
