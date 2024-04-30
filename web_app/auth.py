@@ -68,7 +68,7 @@ def auth_signup():
         user = User(user_id, generate_password_hash(password))
         # Adding new user to the database
         db["users"].insert_one(
-            {"user_id": user.id, "password": user.password, "personalDecks": []}
+            {"user_id": user.id, "password": user.password}
         )
         login_user(user)
         # Redirect to the appropriate page for the logged in user

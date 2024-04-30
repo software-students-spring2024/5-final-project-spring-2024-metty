@@ -8,8 +8,8 @@
   </div>
   <div class="pomodoro-image">
     <img class="tomato-image" src="/static/images/tomato.png" alt="tomato.png">
-    <img class="pomodoro-pasta-image" src="/static/images/pomodoro-pasta.png" alt="pomodoro-pasta.png">
-    <img class="stirring-pasta-image" src="/static/images/stirring-pasta.png" alt="stirring-pasta.png">
+    <img class="pomodoro-pasta-image" src="/static/images/pomodoro-pasta/0.png" alt="pomodoro-pasta.png">
+    <img class="stirring-pasta-image" src="/static/images/stirring-pasta/0.png" alt="stirring-pasta.png">
   </div>
   <p class="time" id="timer">25:00</p>
   <button class="reset-button">
@@ -95,6 +95,9 @@
   let WORK_TIME_SEC = WORK_TIME_MIN * 60;
   let REST_TIME_SEC = REST_TIME_MIN * 60;
 
+  const EATING_FRAME_COUNT = 5;
+  const STIRRING_FRAME_COUNT = 18;
+
   /*
   * This enum stores the state timer is in.
   * This info is useful when skipping from break to work, and vice versa.
@@ -109,6 +112,14 @@
   let timerElement = document.getElementById('timer');
   let timerInterval;
 
+  // we set this interval when we want to play the corresponding animations, and clear when we wan't to pause them 
+  let stirringInterval; 
+  let eatingInterval;
+
+  // these variable hold which frame of the corresponding animations we show
+  let stirringFrameNum = 0;
+  let eatingFrameNum = 0;
+
   // get the buttons and the images
   let startButton = document.querySelector('.start-button');
   let pauseButton = document.querySelector('.pause-button');
@@ -118,9 +129,13 @@
   let pomodoroPastaImage = document.querySelector('.pomodoro-pasta-image');
   let stirringPastaImage = document.querySelector('.stirring-pasta-image');
 
+  let stirringPastaFrames = loadImages("stirring-pasta", STIRRING_FRAME_COUNT);
+  let eatingPastaFrames = loadImages("pomodoro-pasta", EATING_FRAME_COUNT);
+
   // set initial state of the timer
   let currentState = TimerState.WORK;
-  resetTimer();
+  clearTimer();
+  showTomatoImage(); // Show tomato image when the page is refreshed
   
   // add event listeners to buttons 
   startButton.addEventListener('click', startTimer);
@@ -130,52 +145,95 @@
 
   function startTimer() {
     // update the countdown timer every second
+    clearInterval(timerInterval); // clear interval before setting to avoid setting twice
     timerInterval = setInterval(updateTimer, 1000);
+
+    if (currentState == TimerState.WORK) {
+      clearInterval(stirringInterval);
+      stirringInterval = setInterval(stirPasta, 150);
+      showStirringPastaImage(stirringFrameNum);
+    } else {
+      clearInterval(eatingInterval); 
+      eatingInterval = setInterval(eatPasta, 500);
+      showPomodoroPastaImage(eatingFrameNum);
+    }
 
     showPauseButton();
     resetButton.style.display = "initial";
     forwardButton.style.display = "initial";
-    if (currentState == TimerState.WORK) {
-      showStirringPastaImage();
-    } else {
-      showPomodoroPastaImage();
-    }
   }
 
-  function pauseTimer() {
+  function clearTimer() {
     clearInterval(timerInterval); // stops the countdown
-    showStartButton();
-  }
+    clearInterval(stirringInterval); // stops the stirring of the pasta if it's being shown
+    clearInterval(eatingInterval); // stops the eating of the pasta if it's being shown
 
-  function resetTimer() {
-    console.log(currentState);
-    // TODO: Here we need to send information to the server about how much the user has studied
-    clearInterval(timerInterval);
+    // reset the time left and the image
+    if (currentState == TimerState.WORK) {
+      timeLeftInSeconds = WORK_TIME_SEC;
+      showStirringPastaImage(0);
+    } else {
+      timeLeftInSeconds = REST_TIME_SEC;
+      showPomodoroPastaImage(0);
+    }
 
-    // reset time left and the text
-    timeLeftInSeconds = (currentState == TimerState.WORK) ? WORK_TIME_SEC : REST_TIME_SEC;
+    // apply the time left as string
     timerElement.textContent = getTimeAsString(timeLeftInSeconds);
 
-    showTomatoImage();
+    // reset the buttons
     showStartButton();
     resetButton.style.display = "none";
     forwardButton.style.display = "none";
   }
 
-  function forwardTimer() {
-    // TODO: Here we need to send information to the server about how much the user has studied
+  function pauseTimer() {
+    clearInterval(timerInterval); // stops the countdown
+    clearInterval(stirringInterval); // stops the stirring of the pasta if it's being shown
+    clearInterval(eatingInterval); // stops the eating of the pasta if it's being shown
+    showStartButton();
+  }
+
+  async function resetTimer() {
+    if (currentState == TimerState.WORK) {
+      const form = new FormData()
+      form.append("studied_time", WORK_TIME_SEC - timeLeftInSeconds)
+      const response = await fetch("/time-studied", {
+        method: 'POST',
+        body: form
+      })
+    }
+    clearTimer()
+  }
+
+  async function forwardTimer() {
+    if (currentState == TimerState.WORK) {
+      const form = new FormData()
+      form.append("studied_time", WORK_TIME_SEC - timeLeftInSeconds)
+      const response = await fetch("/time-studied", {
+        method: 'POST',
+        body: form
+      })
+    }
     // switch current state
     currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
-    resetTimer();
+    clearTimer();
   }
 
   // update countdown
-  function updateTimer() {
+  async function updateTimer() {
     timeLeftInSeconds--;
     if (timeLeftInSeconds < 0) {
-      // TODO: Here we need to send information to the server about how much the user has studied
-      clearInterval(timerInterval);
-      return;
+      if (currentState == TimerState.WORK) {
+        const form = new FormData()
+        form.append("studied_time", WORK_TIME_SEC)
+        const response = await fetch("/time-studied", {
+          method: 'POST',
+          body: form
+        })
+      }
+      // switch current state
+      currentState = (currentState == TimerState.WORK) ? TimerState.REST : TimerState.WORK;
+      clearTimer();
     }
     timerElement.textContent = getTimeAsString(timeLeftInSeconds);
   }
@@ -192,20 +250,49 @@
 
   function showTomatoImage() {
     tomatoImage.style.display = "initial";
+
     pomodoroPastaImage.style.display = "none";
+    clearInterval(eatingInterval);
+
     stirringPastaImage.style.display = "none";
+    clearInterval(stirringInterval);
   }
 
-  function showPomodoroPastaImage() {
+  // frame number sets which frame of the image to show 
+  function showPomodoroPastaImage(frameNum) {
     tomatoImage.style.display = "none";
+
     pomodoroPastaImage.style.display = "initial";
+    eatingFrameNum = frameNum; // we set eatingFrameNum so when we play animation we play it from that frame
+    pomodoroPastaImage.src = eatingPastaFrames[eatingFrameNum].src;
+
     stirringPastaImage.style.display = "none";
+    clearInterval(stirringInterval);
   }
 
-  function showStirringPastaImage() {
+  // frame number sets which frame of the image to show 
+  function showStirringPastaImage(frameNum) {
     tomatoImage.style.display = "none";
+
     pomodoroPastaImage.style.display = "none";
+    clearInterval(eatingInterval);
+
     stirringPastaImage.style.display = "initial";
+    stirringFrameNum = frameNum; // we set stirringFrameNum so when we play animation we play it from that frame
+    stirringPastaImage.src = stirringPastaFrames[stirringFrameNum].src;
+  }
+
+  async function stirPasta() {
+    stirringFrameNum++;
+    if (stirringFrameNum >= STIRRING_FRAME_COUNT) stirringFrameNum = 0;
+    stirringPastaImage.src = stirringPastaFrames[stirringFrameNum].src;
+  }
+
+  async function eatPasta() {
+    eatingFrameNum++;
+    if (eatingFrameNum >= EATING_FRAME_COUNT) eatingFrameNum = 0;
+    pomodoroPastaImage.src = eatingPastaFrames[eatingFrameNum].src;
+
   }
 
   function getTimeAsString(totalSeconds) {
@@ -217,6 +304,16 @@
     }
     return minutes + ':' + seconds;
   }
+
+  function loadImages(directoryName, frameCount) {
+    let images = [];
+    for (var i = 0; i < frameCount; i++) {
+        var img = new Image();
+        img.src = "/static/images/" + directoryName + "/" + i + ".png";
+        images.push(img);
+    }
+    return images;
+  } 
 
 </script>
 

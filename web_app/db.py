@@ -8,9 +8,11 @@ load_dotenv()
 client = MongoClient(os.getenv("MONGO_URI", "mongodb://mongodb:27017/"))
 db = client["final_project"]
 
+"""
 # Send a ping to confirm a successful connection
 try:
     client.admin.command("ping")
     print("Connected to MongoDB!")
 except Exception as e:
     print("MongoDB connection error:", e)
+"""
