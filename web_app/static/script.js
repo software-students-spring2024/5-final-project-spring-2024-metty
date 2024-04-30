@@ -7,7 +7,6 @@ $(document).ready(function(){
             success: function(response){
                 $('#hoursWorked').text(response.hours_week);
                 $('#daysWorked').text(response.days);
-                $('#dayStreak').text(response.temp);
                 // Draw chart for day_hours
                 //drawChart('dayHoursChart', response.day_hours);
                 // Draw chart for activity_data
@@ -21,27 +20,6 @@ $(document).ready(function(){
         $('#popup').hide();
     });
 });
-
-/*
-$(document).ready(function(){
-    $('#activityBtn').click(function(){
-        // AJAX request to fetch activity data
-        $.ajax({
-            url: '/fetch_activity',
-            type: 'GET',
-            success: function(response){
-                $('#activityData').html(response);
-                $('#popup').show();
-            }
-        });
-    });
-
-    // Close popup when close button is clicked
-    $('.close').click(function(){
-        $('#popup').hide();
-    });
-});
-*/
 
 /*
 function drawChart(canvasId, data) {
