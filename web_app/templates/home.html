@@ -22,10 +22,78 @@
   <button class="pause-button">PAUSE</button>
 </div>
 
+<!-- Settings Modal -->
+<div id="settings-modal" class="settings-modal">
+  <div class="settings-modal-content">
+    <div class="close">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    <h1>SETTINGS</h1>
+    <form id="settings-form" method="post">
+      <div class="card-container">
+        <div class="card">
+          <p>STUDY</p>
+          <input class="mini-card" id="study-time" type="text" value="25" required>  
+        </div>
+        <div class="card">
+          <p>BREAK</p>
+          <input class="mini-card" id="break-time" type="text" value="5" required>  
+        </div>  
+      </div>
+      <button type="submit">OK</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let modal = document.getElementById("settings-modal");
+  let closeButton = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on x button, close the modal
+  closeButton.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // handle submit of settings modal
+  let settingsForm = document.getElementById("settings-form");
+  
+  // Listen for the custom event to open the settings modal
+  document.addEventListener("openSettingsModal", function() {
+    modal.style.display = "block";
+  });
+
+  settingsForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    WORK_TIME_MIN = parseInt(document.getElementById("study-time").value);
+    REST_TIME_MIN = parseInt(document.getElementById("break-time").value);
+    WORK_TIME_SEC = WORK_TIME_MIN * 60;
+    REST_TIME_SEC = REST_TIME_MIN * 60;
+
+    // change the timer html
+    document.getElementById('timer').innerHTML = WORK_TIME_MIN + ":00";
+    // Reset the timer with new values
+    resetTimer();
+    // Close the modal
+    modal.style.display = "none";
+  });
+
+</script>
+
+
+
 <!-- countdown timer -->
 <script>
-  const WORK_TIME = 25 * 60;
-  const REST_TIME = 5 * 60;
+  let WORK_TIME_MIN = 25;
+  let REST_TIME_MIN = 5
+  let WORK_TIME_SEC = WORK_TIME_MIN * 60;
+  let REST_TIME_SEC = REST_TIME_MIN * 60;
 
   const EATING_FRAME_COUNT = 5;
   const STIRRING_FRAME_COUNT = 18;
@@ -102,10 +170,10 @@
 
     // reset the time left and the image
     if (currentState == TimerState.WORK) {
-      timeLeftInSeconds = WORK_TIME;
+      timeLeftInSeconds = WORK_TIME_SEC;
       showStirringPastaImage(0);
     } else {
-      timeLeftInSeconds = REST_TIME;
+      timeLeftInSeconds = REST_TIME_SEC;
       showPomodoroPastaImage(0);
     }
 
@@ -128,7 +196,7 @@
   async function resetTimer() {
     if (currentState == TimerState.WORK) {
       const form = new FormData()
-      form.append("studied_time", WORK_TIME - timeLeftInSeconds)
+      form.append("studied_time", WORK_TIME_SEC - timeLeftInSeconds)
       const response = await fetch("/time-studied", {
         method: 'POST',
         body: form
@@ -140,7 +208,7 @@
   async function forwardTimer() {
     if (currentState == TimerState.WORK) {
       const form = new FormData()
-      form.append("studied_time", WORK_TIME - timeLeftInSeconds)
+      form.append("studied_time", WORK_TIME_SEC - timeLeftInSeconds)
       const response = await fetch("/time-studied", {
         method: 'POST',
         body: form
@@ -157,7 +225,7 @@
     if (timeLeftInSeconds < 0) {
       if (currentState == TimerState.WORK) {
         const form = new FormData()
-        form.append("studied_time", WORK_TIME)
+        form.append("studied_time", WORK_TIME_SEC)
         const response = await fetch("/time-studied", {
           method: 'POST',
           body: form

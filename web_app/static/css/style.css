@@ -37,6 +37,10 @@ body {
     margin-right: 20;
 }
 
+.menu a:hover {
+    cursor: pointer;
+}
+
 /* IMAGES */
 .images-container {
     display: flex;
@@ -183,3 +187,93 @@ body {
 #auth-cta a {
     color: inherit;
 }
+
+/* MODAL */
+.settings-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.settings-modal-content {
+    background-color: #BFB0AD;
+    margin: 15% auto; 
+    padding: 20px;
+    width: 500px; 
+    border-radius: 10px;
+    padding-bottom: 60px;
+}
+
+.settings-modal h1 {
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card {
+    background-color: #fafafa;
+    width: 200px; 
+    height: 140px;
+    border-radius: 12px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.mini-card {
+    background-color: #DADADA;
+    width: 100px; 
+    height: 70px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.card p {
+    font-family: 'Single Day', sans-serif;
+    font-size: 25px;
+    margin-bottom: -10px;
+    margin-top: 20px;
+}
+
+.card input {
+    font-family: 'Single Day', sans-serif;
+    font-size: 80px;
+}
+
+#settings-form button {
+    float: right;
+    font-family: 'Single Day', sans-serif;
+    font-size: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+/* The Close Button */
+.close {
+    color: #fafafa;
+    float: right;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
