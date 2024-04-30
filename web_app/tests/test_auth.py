@@ -1,6 +1,6 @@
 from unittest.mock import patch
-from web_app.auth import load_user
-
+from web_app.auth import auth_signup, load_user
+from web_app.app import app
 
 class Mock_Collection:
     def __init__(self, entries):
@@ -12,6 +12,12 @@ class Mock_Collection:
                 return entry
         return None
 
+    def insert_one(self, criteria):
+        return True;
+
+class Mock_Request:
+    def __init__(self, form_data):
+        self.form = form_data
 
 class Tests:
     """Class for testing auth.py"""
@@ -37,3 +43,24 @@ class Tests:
             user = load_user(user_id)
             print(mock_db["users"].find_one({"user_id": user_id}))
             assert user == None
+
+    def test_auth_signup_username_taken(self):
+        mock_db = {"users": Mock_Collection([{"user_id": "0", "password": "1234"}])}
+        mock_form = { "username": "0", "password": "test_password", "confirm-password": "test_password"}
+        mock_request = Mock_Request(mock_form)
+
+        with app.test_request_context('/', method='POST', data=mock_form):
+            with patch("web_app.auth.db", mock_db), patch("web_app.auth.request", mock_request):
+                response = auth_signup()
+                assert isinstance(response, str)    
+
+    def test_auth_signup_password_mismatch(self):
+        mock_db = {"users": Mock_Collection([{"user_id": "0", "password": "1234"}])}
+        mock_form = { "username": "1", "password": "test_password", "confirm-password": "test_password_1"}
+        mock_request = Mock_Request(mock_form)
+
+        with app.test_request_context('/', method='POST', data=mock_form):
+            with patch("web_app.auth.db", mock_db), patch("web_app.auth.request", mock_request):
+                response = auth_signup()
+                assert isinstance(response, str)    
+
