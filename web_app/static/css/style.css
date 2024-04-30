@@ -43,20 +43,9 @@ body {
 
 /* IMAGES */
 .images-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 85vh;
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 10px;
-    margin-bottom: 10px; /* Add space between images and button */
 }
 
 .doropomo {
-    position: absolute;
-    top: 30px; /* Keep the "doropomo" image fixed at the top of its container */
 }
 
 .doropomo img {
@@ -64,32 +53,20 @@ body {
 }
 
 .tomato-image {
-    position: relative;
-    margin-top: 10vh;
-    margin-right: 15px;
     width: 500px;
 }
 
 .pomodoro-pasta-image {
-    position: relative;
-    margin-top: 10vh; 
     width: 650px;
 }
 
 .stirring-pasta-image {
-    position: relative;
-    margin-top: -10vh;
-    margin-right: 7px;
     width: 600px;
     transform: rotate(-2deg); 
 }
 
 .start-button, .pause-button, .continue-button {
     font-family: 'Single Day', sans-serif;
-    position: absolute;
-    top: 72%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -99,10 +76,6 @@ body {
 
 .reset-button {
     font-family: 'Single Day', sans-serif;
-    position: absolute;
-    top: 73%;
-    left: 41.5%;
-    transform: translate(-50%, -50%);
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -112,10 +85,6 @@ body {
 
 .forward-button {
     font-family: 'Single Day', sans-serif;
-    position: absolute;
-    top: 73%;
-    left: 58.5%;
-    transform: translate(-50%, -50%);
     color: #FAFAFA;
     border: none;
     background-color: rgba(0, 0, 0, 0);
@@ -125,10 +94,6 @@ body {
 
 .time {
     font-family: 'Single Day', sans-serif;
-    position: absolute;
-    top: 38%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     color: #FAFAFA;
     font-size: 140px;
 }
