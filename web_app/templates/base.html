@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/1f2ae74b43.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   
   <body>
@@ -18,16 +19,13 @@
                 <img src="{{ url_for('static', filename='images/tomato.png') }}" alt="Logo">
             </a>
             <div class="menu">
-                <a href="/activity">ACTIVITY</a>
-                <a id="settings-button">SETTINGS</a>
-                {% if isLoggedIn %}
-                  <a href="/logout">LOG OUT</a>
-                {% else %}
-                <!--a href="/#" class="popup-trigger" data-popup="activity">ACTIVITY</-->
-                <button id="activityBtn">Activity</button>
-                <a href="/settings">SETTINGS</a>
+              <button id="activityBtn">Activity</button>
+              <a id="settings-button">SETTINGS</a>
+              {% if isLoggedIn %}
+                <a href="/logout">LOG OUT</a>
+              {% else %}
                 <a href="/login">LOG IN</a>
-                {% endif %}
+              {% endif %}
             </div>
         </div>
         <main>
