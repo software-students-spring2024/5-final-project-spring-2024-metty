@@ -7,6 +7,9 @@
       href="{{ url_for('static', filename='css/style.css') }}"
     />
     <script src="https://kit.fontawesome.com/1f2ae74b43.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   
   <body>
@@ -16,19 +19,45 @@
                 <img src="{{ url_for('static', filename='images/tomato.png') }}" alt="Logo">
             </a>
             <div class="menu">
-                <a href="/activity">ACTIVITY</a>
-                <a id="settings-button">SETTINGS</a>
-                {% if isLoggedIn %}
-                  <a href="/logout">LOG OUT</a>
-                {% else %}
-                  <a href="/login">LOG IN</a>
-                {% endif %}
+              <button id="activityBtn">Activity</button>
+              <a id="settings-button">SETTINGS</a>
+              {% if isLoggedIn %}
+                <a href="/logout">LOG OUT</a>
+              {% else %}
+                <a href="/login">LOG IN</a>
+              {% endif %}
             </div>
         </div>
         <main>
           {% block container %} {% endblock %}
         </main>
     </div>
+
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <div class="stats-display"></div>
+          <div class="stat">
+              <h2>Hours Worked</h2>
+              <p id="hoursWorked"></p>
+          </div>
+          <div class="stat">
+              <h2>Days Worked</h2>
+              <p id="daysWorked"></p>
+          </div>
+          <div class="graph">
+              <h2>Day Hours</h2>
+              <canvas id="dayHoursChart"></canvas>
+          </div>
+          <div class="graph">
+              <h2>Activity Data</h2>
+              <canvas id="activityDataChart"></canvas>
+          </div>
+          <span class="close-activity">&times;</span>
+          <div id="activityData"></div>
+        </div>
+      </div>
+  </div>
+
     <!-- see when settings is clicked -->
      <script>
       let settingsButton = document.getElementById("settings-button");
@@ -38,4 +67,5 @@
       });
     </script>
   </body>
+
 </html>
