@@ -1,5 +1,9 @@
-from web_app.app import app
+from web_app.app import app, get_activity_data
+from unittest.mock import patch
 
+class Mock_User:
+    def __init__(self, is_authenticated):
+        self.is_authenticated = is_authenticated
 
 class Tests:
     """Class for testing app.py"""
@@ -32,3 +36,10 @@ class Tests:
             200,
             401,
         ), "Expected response to return 200 or 401"
+
+    def test_get_activity_data(self):
+        mock_user = Mock_User(False)
+        with patch("web_app.app.current_user", mock_user):
+            with app.app_context():
+                response = get_activity_data()
+                assert response.status_code == 200       

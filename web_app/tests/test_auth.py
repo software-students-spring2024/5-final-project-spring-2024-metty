@@ -64,3 +64,8 @@ class Tests:
                 response = auth_signup()
                 assert isinstance(response, str)    
 
+    def test_insert_one(self):
+        mock_db = {"users": Mock_Collection([{"user_id": "1", "password": "1234"}])}
+        result = mock_db["users"].insert_one(True)
+        assert result == True
+
