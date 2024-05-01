@@ -191,29 +191,8 @@ body {
     color: inherit;
 }
 
-.popup {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
 
-.popup-content {
-    background-color: #BFB0AD;
-    margin: 15% auto;
-    padding: 10px;
-    border: 1px solid #BFB0AD;
-    width: 50%;
-    height: 70%;
-    position: relative;
-    top: 30%;
-    transform: translateY(-50%);
-}
+
 
 .stats-display {
     display: flex;
@@ -222,31 +201,8 @@ body {
     align-items: flex-start;
 }
 
-.close-activity {
-    color: #FAFAFA;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-activity:hover,
-.close-activity:focus {
-    color: #463331;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.stat {
-    width: calc(33.33% - 20px);
-    margin: 10px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-}
 /* MODAL */
-.settings-modal {
+.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -259,7 +215,7 @@ body {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.settings-modal-content {
+.modal-content {
     background-color: #BFB0AD;
     margin: 15% auto; 
     padding: 20px;
