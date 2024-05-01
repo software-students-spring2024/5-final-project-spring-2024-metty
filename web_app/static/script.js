@@ -25,7 +25,7 @@ $(document).ready(function(){
         });
     });
 
-    $('.close-activity').click(function(){
+    $('.close').click(function(){
         $('#popup').hide();
     });
 });
