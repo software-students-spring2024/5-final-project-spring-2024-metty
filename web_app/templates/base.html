@@ -35,6 +35,9 @@
 
     <div id="popup" class="popup">
       <div class="popup-content">
+        {% if not isLoggedIn %}
+          <p>Error: You must be logged in to view activity data.</p>
+        {% endif %}
         <div class="stats-display"></div>
           <div class="stat">
               <h2>Hours Worked</h2>
