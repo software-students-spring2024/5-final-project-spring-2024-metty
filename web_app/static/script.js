@@ -42,15 +42,26 @@ function drawChart(canvasId, data) {
             datasets: [{
                 label: 'Data',
                 data: values,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+                backgroundColor: 'rgba(191, 176, 173, 1)',
+                pointBackgroundColor: 'rgba(250, 250, 250, 1)',
             }]
         },
         options: {
             scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(70, 51, 49, 0.2)', // X-axis gridline color
+                        borderColor: 'rgba(70, 51, 49, 1)', // X-axis border color
+                        borderWidth: 20 // X-axis border width
+                    }
+                },
                 y: {
-                    beginAtZero: true
+                    grid: {
+                        beginAtZero: true,
+                        color: 'rgba(70, 51, 49, 0.2)', // Y-axis gridline color
+                        borderColor: 'rgba(70, 51, 49, 1)', // Y-axis border color
+                        borderWidth: 20 // Y-axis border width
+                    }
                 }
             }
         }
