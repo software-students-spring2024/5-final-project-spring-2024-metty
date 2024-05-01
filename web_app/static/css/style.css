@@ -87,7 +87,7 @@ body {
 .start-button, .pause-button, .continue-button {
     font-family: 'Single Day', sans-serif;
     position: absolute;
-    top: 72%;
+    top: 475px;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #FAFAFA;
@@ -100,7 +100,7 @@ body {
 .reset-button {
     font-family: 'Single Day', sans-serif;
     position: absolute;
-    top: 73%;
+    top: 480px;
     left: 41.5%;
     transform: translate(-50%, -50%);
     color: #FAFAFA;
@@ -113,7 +113,7 @@ body {
 .forward-button {
     font-family: 'Single Day', sans-serif;
     position: absolute;
-    top: 73%;
+    top: 480px;
     left: 58.5%;
     transform: translate(-50%, -50%);
     color: #FAFAFA;
@@ -126,7 +126,7 @@ body {
 .time {
     font-family: 'Single Day', sans-serif;
     position: absolute;
-    top: 38%;
+    top: 250px;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #FAFAFA;
