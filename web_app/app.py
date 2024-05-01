@@ -7,7 +7,6 @@ from auth import *
 from flask_login import current_user
 from datetime import datetime
 
-
 load_dotenv()
 
 app = Flask(__name__)
@@ -17,38 +16,31 @@ login_manager.init_app(app)
 load_dotenv()
 app.secret_key = os.getenv("SECRET_KEY")
 
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     if current_user.is_authenticated:
         return render_template("home.html", isLoggedIn=True)
     return render_template("home.html", isLoggedIn=False)
 
-
 @app.route("/signup", methods=["GET"])
 def render_signup():
     return render_template("signup.html")
-
 
 @app.route("/signup", methods=["POST"])
 def signup():
     return auth_signup()
 
-
 @app.route("/login", methods=["GET"])
 def render_login():
     return render_template("login.html")
-
 
 @app.route("/login", methods=["POST"])
 def login():
     return auth_login()
 
-
 @app.route("/logout")
 def logout():
     return auth_logout()
-
 
 @app.route("/time-studied", methods=["POST"])
 def insert_time_studied():
@@ -79,7 +71,6 @@ def insert_time_studied():
 @app.route("/activity-data", methods=["GET"])
 def get_activity_data():
     # get acitvity data
-
     # for not logged in users, have no data but still display the structure
     hours_week = 0
     days = 0
@@ -99,7 +90,7 @@ def get_activity_data():
         hours_week =  f"{hours:02d}:{minutes:02d}:{seconds:02d}"
         days = len(time_studied_stats.keys())
 
-        # graph 1
+        # calculate stats for the graph
         for date_str, sec in time_studied_stats.items():
             # Convert date string to datetime object
             date_obj = datetime.strptime(date_str, '%Y-%m-%d')
@@ -108,10 +99,6 @@ def get_activity_data():
             # Update the corresponding day in the day_hours dictionary
             new_time = f"{(day_hours[day_of_week] + (sec / 3600)):02f}"
             day_hours[day_of_week] = new_time
-    
-    # hours_week = 5
-    # days = 6
-    # day_hours = {'Mon': 5, 'Tue': 2, 'Wed': 0}
 
     jsonified_items = jsonify({
         "hours_week": hours_week,
@@ -120,7 +107,6 @@ def get_activity_data():
     })
 
     return jsonified_items
-
 
 if __name__ == "__main__":
     FLASK_PORT = os.getenv("FLASK_PORT", "5000")

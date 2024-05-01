@@ -5,15 +5,6 @@ $(document).ready(function(){
             url: '/activity-data',
             type: 'GET',
             success: function(response){
-                /*
-                $('#hoursWorked').text(response.hours_week);
-                $('#daysWorked').text(response.days);
-                // Draw chart for day_hours
-                drawChart('dayHoursChart', response.day_hours);
-                // Draw chart for activity_data
-                //drawChart('activityDataChart', response.activity_data);
-                $('#popup').show();
-                */
                 $('#hoursWorked').text(response.hours_week);
                 $('#daysWorked').text(response.days);
                 $('#popup').show();
