@@ -37,7 +37,10 @@ body {
     margin-right: 20;
 }
 
-.menu a:hover {
+.menu a:hover,
+.menu a:focus {
+    color: #fafafa;
+    text-decoration: none;
     cursor: pointer;
 }
 
@@ -230,7 +233,7 @@ body {
 
 .close-activity:hover,
 .close-activity:focus {
-    color: #FAFAFA;
+    color: #463331;
     text-decoration: none;
     cursor: pointer;
 }
@@ -325,7 +328,7 @@ body {
   
 .close:hover,
 .close:focus {
-    color: black;
+    color: #463331;
     text-decoration: none;
     cursor: pointer;
 }
