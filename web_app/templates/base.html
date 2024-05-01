@@ -33,25 +33,29 @@
         </main>
     </div>
 
-    <div id="popup" class="popup">
-      <div class="popup-content">
+    <div id="popup" class="modal">
+      <div class="modal-content">
+        <div class="close">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
         {% if not isLoggedIn %}
           <p>Error: You must be logged in to view activity data.</p>
         {% endif %}
         <div class="stats-display"></div>
-          <div class="stat">
+          <div class="card-container">
+            <div class="card">
               <h2>Hours Worked</h2>
               <p id="hoursWorked"></p>
           </div>
-          <div class="stat">
+          <div class="card">
               <h2>Days Worked</h2>
               <p id="daysWorked"></p>
+          </div>
           </div>
           <div class="graph">
               <h2>Day Hours</h2>
               <canvas id="dayHoursChart"></canvas>
           </div>
-          <span class="close-activity">&times;</span>
           <div id="activityData"></div>
         </div>
       </div>
