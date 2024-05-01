@@ -38,8 +38,9 @@
         <div class="close">
           <i class="fa-solid fa-xmark"></i>
         </div>
+        <h1>ACTIVITY</h1>
         {% if not isLoggedIn %}
-          <p>Error: You must be logged in to view activity data.</p>
+          <p>ERROR: You must be logged in to view activity data.</p>
         {% endif %}
         <div class="stats-display"></div>
           <div class="card-container">
@@ -53,7 +54,7 @@
           </div>
           </div>
           <div class="graph">
-              <h2>Day Hours</h2>
+              <h2>Hours vs Days Graph</h2>
               <canvas id="dayHoursChart"></canvas>
           </div>
           <div id="activityData"></div>
