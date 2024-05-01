@@ -71,15 +71,14 @@
 
   settingsForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    WORK_TIME_MIN = parseInt(document.getElementById("study-time").value);
-    REST_TIME_MIN = parseInt(document.getElementById("break-time").value);
-    WORK_TIME_SEC = WORK_TIME_MIN * 60;
-    REST_TIME_SEC = REST_TIME_MIN * 60;
+    workTimeMin = parseInt(document.getElementById("study-time").value);
+    restTimeMin = parseInt(document.getElementById("break-time").value);
+    workTimeSec = workTimeMin * 60;
+    restTimeSec = restTimeMin * 60;
 
     // change the timer html
-    document.getElementById('timer').innerHTML = WORK_TIME_MIN + ":00";
+    document.getElementById('timer').innerHTML = workTimeMin + ":00";
     // Reset the timer with new values
-    //resetTimer();
     clearTimer();
     // Close the modal
     modal.style.display = "none";
@@ -91,10 +90,10 @@
 
 <!-- countdown timer -->
 <script>
-  let WORK_TIME_MIN = 25;
-  let REST_TIME_MIN = 5
-  let WORK_TIME_SEC = WORK_TIME_MIN * 60;
-  let REST_TIME_SEC = REST_TIME_MIN * 60;
+  let workTimeMin = 25;
+  let restTimeMin = 5
+  let workTimeSec = workTimeMin * 60;
+  let restTimeSec = restTimeMin * 60;
 
   const EATING_FRAME_COUNT = 5;
   const STIRRING_FRAME_COUNT = 18;
@@ -171,10 +170,10 @@
 
     // reset the time left and the image
     if (currentState == TimerState.WORK) {
-      timeLeftInSeconds = WORK_TIME_SEC;
+      timeLeftInSeconds = workTimeSec;
       showStirringPastaImage(0);
     } else {
-      timeLeftInSeconds = REST_TIME_SEC;
+      timeLeftInSeconds = restTimeSec;
       showPomodoroPastaImage(0);
     }
 
@@ -197,7 +196,7 @@
   async function resetTimer() {
     if (currentState == TimerState.WORK) {
       const form = new FormData()
-      form.append("studied_time", WORK_TIME_SEC - timeLeftInSeconds)
+      form.append("studied_time", workTimeSec - timeLeftInSeconds)
       const response = await fetch("/time-studied", {
         method: 'POST',
         body: form
@@ -209,7 +208,7 @@
   async function forwardTimer() {
     if (currentState == TimerState.WORK) {
       const form = new FormData()
-      form.append("studied_time", WORK_TIME_SEC - timeLeftInSeconds)
+      form.append("studied_time", workTimeSec - timeLeftInSeconds)
       const response = await fetch("/time-studied", {
         method: 'POST',
         body: form
@@ -226,7 +225,7 @@
     if (timeLeftInSeconds < 0) {
       if (currentState == TimerState.WORK) {
         const form = new FormData()
-        form.append("studied_time", WORK_TIME_SEC)
+        form.append("studied_time", workTimeSec)
         const response = await fetch("/time-studied", {
           method: 'POST',
           body: form
