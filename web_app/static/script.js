@@ -17,6 +17,14 @@ $(document).ready(function(){
                 $('#hoursWorked').text(response.hours_week);
                 $('#daysWorked').text(response.days);
                 $('#popup').show();
+
+                // Close popup when clicking outside
+                $(document).mouseup(function(e) {
+                    var popupContent = $(".popup-content");
+                    if (!popupContent.is(e.target) && popupContent.has(e.target).length === 0) {
+                        $('#popup').hide();
+                    }
+                });
     
                 // Render charts asynchronously after showing the popup
                 setTimeout(function() {
