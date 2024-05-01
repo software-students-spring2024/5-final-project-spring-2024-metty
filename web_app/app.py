@@ -72,17 +72,44 @@ def insert_time_studied():
 @app.route("/activity-data", methods=["GET"])
 def get_activity_data():
     # get acitvity data
-    # TO DO: need to obtain from database
-    hours_week = 5
-    days = 6
-    day_hours = {'Mon': 5, 'Tue': 2, 'Wed': 0}
-    activity_data = { '2024-04-28': 55 }
+
+    # for not logged in users, have no data but still display the structure
+    hours_week = 0
+    days = 0
+    day_hours = {'Mon': 0.0, 'Tue': 0.0, 'Wed': 0.0, 'Thurs': 0.0, 'Fri': 0.0, 'Sat': 0.0, 'Sun': 0.0}
+    if (current_user.is_authenticated):
+        # time_in_study_mode: { '2024-04-30': 5 , '2024-04-31': 5 }
+
+        # get time studied statistics from the database
+        user = db.users.find_one({"user_id": current_user.id})
+        time_studied_stats = user.get("time_in_study_mode",{})
+
+        # calculate hh:mm:ss for total time studied stat
+        seconds = sum(time_studied_stats.values())
+        hours = seconds // 3600
+        minutes = (seconds % 3600) // 60
+        seconds = seconds % 60
+        hours_week =  f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+        days = len(time_studied_stats.keys())
+
+        # graph 1
+        for date_str, sec in time_studied_stats.items():
+            # Convert date string to datetime object
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+            # Get the day of the week (returns 0 for Monday, 1 for Tuesday, ..., 6 for Sunday)
+            day_of_week = date_obj.strftime('%a')
+            # Update the corresponding day in the day_hours dictionary
+            new_time = f"{(day_hours[day_of_week] + (sec / 3600)):02f}"
+            day_hours[day_of_week] = new_time
+    
+    # hours_week = 5
+    # days = 6
+    # day_hours = {'Mon': 5, 'Tue': 2, 'Wed': 0}
 
     jsonified_items = jsonify({
         "hours_week": hours_week,
         "days": days,
         "day_hours": day_hours,
-        "activity_data": activity_data
     })
 
     return jsonified_items
