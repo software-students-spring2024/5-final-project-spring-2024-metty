@@ -19,7 +19,7 @@
                 <img src="{{ url_for('static', filename='images/tomato.png') }}" alt="Logo">
             </a>
             <div class="menu">
-              <button id="activityBtn">Activity</button>
+              <a id="activityBtn">ACTIVITY</a>
               <a id="settings-button">SETTINGS</a>
               {% if isLoggedIn %}
                 <a href="/logout">LOG OUT</a>
@@ -47,10 +47,6 @@
           <div class="graph">
               <h2>Day Hours</h2>
               <canvas id="dayHoursChart"></canvas>
-          </div>
-          <div class="graph">
-              <h2>Activity Data</h2>
-              <canvas id="activityDataChart"></canvas>
           </div>
           <span class="close-activity">&times;</span>
           <div id="activityData"></div>

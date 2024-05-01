@@ -21,7 +21,6 @@ $(document).ready(function(){
                 // Render charts asynchronously after showing the popup
                 setTimeout(function() {
                     drawChart('dayHoursChart', response.day_hours);
-                    drawChart('activityDataChart', response.activity_data);
                 }, 0);
             }
         });
