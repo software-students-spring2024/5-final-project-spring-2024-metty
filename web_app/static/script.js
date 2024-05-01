@@ -8,14 +8,6 @@ $(document).ready(function(){
                 $('#hoursWorked').text(response.hours_week);
                 $('#daysWorked').text(response.days);
                 $('#popup').show();
-
-                // Close popup when clicking outside
-                $(document).mouseup(function(e) {
-                    var popupContent = $(".popup-content");
-                    if (!popupContent.is(e.target) && popupContent.has(e.target).length === 0) {
-                        $('#popup').hide();
-                    }
-                });
     
                 // Render charts asynchronously after showing the popup
                 setTimeout(function() {
@@ -27,6 +19,13 @@ $(document).ready(function(){
 
     $('.close').click(function(){
         $('#popup').hide();
+    });
+
+    // Close the popup when clicking outside of it
+    $(window).click(function(event) {
+        if (event.target == $('#popup')[0]) {
+            $('#popup').hide();
+        }
     });
 });
 
@@ -50,6 +49,7 @@ function drawChart(canvasId, data) {
             scales: {
                 x: {
                     grid: {
+                        beginAtZero: true,
                         color: 'rgba(70, 51, 49, 0.2)', // X-axis gridline color
                         borderColor: 'rgba(70, 51, 49, 1)', // X-axis border color
                         borderWidth: 20 // X-axis border width
